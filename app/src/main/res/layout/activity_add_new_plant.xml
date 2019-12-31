@@ -15,72 +15,109 @@
         android:layout_marginTop="52dp"
         android:text="New Plant"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/newPlantSubTitle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/newPlantSubTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="Welcome!"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/plantNameButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/plantNameButton"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="24dp"
-        android:text="Plant Name"
+        android:layout_marginTop="168dp"
+        android:text="Nick Name"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/categoryButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/locationButton"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="24dp"
-        android:text="House Location"
+        android:layout_marginTop="39dp"
 
+        android:text="Kind"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/pictureButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nicknameText" />
+
+    <Button
+        android:id="@+id/locationButton2"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="36dp"
+
+        android:text="House Location"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/locationText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/pictureButton"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="148dp"
-        android:text="Picture"
+        android:layout_width="126dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="272dp"
 
+        android:layout_marginTop="44dp"
+        android:text="Picture"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/categoryButton"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="24dp"
-        android:text="Catergory"
+        android:id="@+id/doneButton"
+        android:layout_width="85dp"
+        android:layout_height="76dp"
+        android:layout_marginBottom="12dp"
 
+        android:onClick="plantDone"
+        android:text="Done"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/locationButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/nicknameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Nick Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plantNameButton" />
+
+    <EditText
+        android:id="@+id/kindText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="49dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Kind"
+        app:layout_constraintBottom_toTopOf="@+id/locationButton2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintTop_toBottomOf="@+id/locationButton"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/locationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Location in the house"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
