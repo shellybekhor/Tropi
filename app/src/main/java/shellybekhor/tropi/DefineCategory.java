@@ -1,8 +1,9 @@
 package shellybekhor.tropi;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import shellybekhor.tropi.Plants.Plant;
-import shellybekhor.tropi.Plants.Socculent;
+import shellybekhor.tropi.Plants.Succulent;
 import shellybekhor.tropi.Plants.Special;
 import shellybekhor.tropi.Plants.Spices;
 import shellybekhor.tropi.Plants.Tropic;
@@ -23,8 +24,8 @@ public class DefineCategory extends AppCompatActivity {
         setContentView(R.layout.activity_define_category);
     }
 
-    public void createSocculent(View view){
-        LaunchCreatePlant(Socculent.CATEGORY);
+    public void createSucculent(View view){
+        LaunchCreatePlant(Succulent.CATEGORY);
     }
 
     public void createSpices(View view){
@@ -38,6 +39,14 @@ public class DefineCategory extends AppCompatActivity {
     public void createTropic(View view){
         LaunchCreatePlant(Tropic.CATEGORY);
     }
+
+    public void findCategory(View view){
+        // get the category of the new plant
+        // call the createX by the definition
+        int foundCategory = DefineCategory.findCategory();
+        LaunchCreatePlant(foundCategory);
+    }
+
 
     void LaunchCreatePlant(int category){
         Intent intent = new Intent(this, AddNewPlant.class);

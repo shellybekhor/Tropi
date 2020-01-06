@@ -24,7 +24,7 @@
         android:layout_width="129dp"
         android:layout_height="122dp"
         android:layout_marginBottom="24dp"
-        android:onClick="createSocculent"
+        android:onClick="createSucculent"
         android:text="Socculent"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/plantNameButton3"

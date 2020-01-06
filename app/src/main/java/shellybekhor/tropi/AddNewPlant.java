@@ -2,7 +2,7 @@ package shellybekhor.tropi;
 
 import androidx.appcompat.app.AppCompatActivity;
 import shellybekhor.tropi.Plants.Plant;
-import shellybekhor.tropi.Plants.Socculent;
+import shellybekhor.tropi.Plants.Succulent;
 import shellybekhor.tropi.Plants.Special;
 import shellybekhor.tropi.Plants.Spices;
 import shellybekhor.tropi.Plants.Tropic;
@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class AddNewPlant extends AppCompatActivity {
     private static final String LOG_TAG = AddNewPlant.class.getSimpleName();
@@ -27,7 +26,6 @@ public class AddNewPlant extends AppCompatActivity {
         int category = intent.getIntExtra(DefineCategory.EXTRA_CATEGORY, 0);
         currentCategory = category;
         Log.d(LOG_TAG, String.valueOf(category));
-
     }
 
     public void plantDone(View view){
@@ -40,8 +38,8 @@ public class AddNewPlant extends AppCompatActivity {
 
         Plant newPlant;
         switch (currentCategory){
-            case Socculent.CATEGORY:
-                newPlant = new Socculent(location, kind, nickname);
+            case Succulent.CATEGORY:
+                newPlant = new Succulent(location, kind, nickname);
                 break;
             case Tropic.CATEGORY:
                 newPlant = new Tropic(location, kind, nickname);
