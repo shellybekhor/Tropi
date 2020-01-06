@@ -8,6 +8,31 @@
     tools:context=".MainActivity">
 
 
+    <!--    TODO hidden tip title and text-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tropyTipText"-->
+<!--        android:layout_width="342dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:background="@color/colorDefaultWindows"-->
+<!--        android:text="Put your succulents in direct sun today"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tropyTipTitle"-->
+<!--        app:layout_constraintVertical_bias="0.1" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tropyTipTitle"-->
+<!--        android:layout_width="101dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:text="Tropy Tip"-->
+<!--        android:textSize="20dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/plantsToDoList" />-->
+
     <ScrollView
         android:id="@+id/plantsToDoList"
         android:layout_width="350dp"
@@ -17,39 +42,16 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.416">
+        app:layout_constraintVertical_bias="0.577">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
     </ScrollView>
-
-    <TextView
-        android:id="@+id/tropyTipText"
-        android:layout_width="342dp"
-        android:layout_height="50dp"
-        android:background="@color/colorDefaultWindows"
-        android:text="Put your succulents in direct sun today"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tropyTipTitle"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <TextView
-        android:id="@+id/tropyTipTitle"
-        android:layout_width="101dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="15dp"
-        android:text="Tropy Tip"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantsToDoList" />
 
     <Button
         android:id="@+id/addPlantButton"
@@ -64,21 +66,35 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ScrollView
-        android:layout_width="360dp"
-        android:layout_height="117dp"
-        app:layout_constraintBottom_toTopOf="@+id/plantsToDoList"
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="409dp"
+        android:layout_height="152dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </HorizontalScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="80px"
+        android:layout_height="80px"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="@color/colorDefaultBackground"
+        android:background="@color/colorDefaultBackground"
+        android:color = "@color/cardview_dark_background"
+        android:text="+"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
