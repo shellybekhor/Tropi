@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Tropi</string>
+
+    <string name="Succulent">Succulent</string>
+    <string name="Tropic">Tropic</string>
+    <string name="Spice">Spice</string>
+
+    <string name="yesButton">YES</string>
+    <string name="noButton">NO</string>
+
+    <string name="categoryQuestion1">Are the leaves flashy?</string>
+    <string name="categoryQuestion2">Are the leaves decorated?</string>
+    <string name="categoryQuestion3">Did you ever eat it or it has a strong smell?</string>
 </resources>

@@ -76,6 +76,7 @@
         android:layout_marginBottom="100dp"
         android:text="don't know the category"
         android:textSize="18dp"
+        android:onClick="findCategory"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"

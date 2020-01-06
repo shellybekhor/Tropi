@@ -1,3 +1,7 @@
+/**
+ * This class is another type of a plant that is not in use at the moment.
+ */
+
 package shellybekhor.tropi.Plants;
 
 public class Special extends Plant {

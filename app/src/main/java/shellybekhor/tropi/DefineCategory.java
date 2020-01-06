@@ -2,7 +2,6 @@ package shellybekhor.tropi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import shellybekhor.tropi.Plants.Plant;
 import shellybekhor.tropi.Plants.Succulent;
 import shellybekhor.tropi.Plants.Special;
 import shellybekhor.tropi.Plants.Spices;
@@ -25,35 +24,29 @@ public class DefineCategory extends AppCompatActivity {
     }
 
     public void createSucculent(View view){
-        LaunchCreatePlant(Succulent.CATEGORY);
+        launchCreatePlant(Succulent.CATEGORY);
     }
 
     public void createSpices(View view){
-        LaunchCreatePlant(Spices.CATEGORY);
-    }
-
-    public void createSpecial(View view){
-        LaunchCreatePlant(Special.CATEGORY);
+        launchCreatePlant(Spices.CATEGORY);
     }
 
     public void createTropic(View view){
-        LaunchCreatePlant(Tropic.CATEGORY);
+        launchCreatePlant(Tropic.CATEGORY);
     }
 
-    public void findCategory(View view){
-        // get the category of the new plant
-        // call the createX by the definition
-        int foundCategory = DefineCategory.findCategory();
-        LaunchCreatePlant(foundCategory);
-    }
+    public void findCategory(View view) { launchFindCategory(); }
 
-
-    void LaunchCreatePlant(int category){
+    public void launchCreatePlant(int category){
         Intent intent = new Intent(this, AddNewPlant.class);
         intent.putExtra(EXTRA_MESSAGE, category);
         startActivityForResult(intent, 1);
 
     }
 
+    public void launchFindCategory() {
+        Intent intent = new Intent(this, FindCategory.class);
+        startActivityForResult(intent, 1);
+    }
 
 }
