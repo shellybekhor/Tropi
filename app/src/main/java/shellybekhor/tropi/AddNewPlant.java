@@ -47,15 +47,19 @@ public class AddNewPlant extends AppCompatActivity {
             case Spices.CATEGORY:
                 newPlant = new Spices(location, kind, nickname);
                 break;
-            case Special.CATEGORY:
-                newPlant = new Special(location, kind, nickname);
-                break;
+//            case Special.CATEGORY:
+//                newPlant = new Special(location, kind, nickname);
+//                break;
             default:
                 newPlant = null;
         }
 
-        Intent intent = new Intent(this, MainActivity.class);
+//        Intent intent = new Intent(this, MainActivity.class);
+//        intent.putExtra(EXTRA_PLANT, newPlant);
+//        startActivityForResult(intent, MainActivity.PLANT_REQUEST);
+
+        Intent intent = new Intent(this, ChooseIconCategorizedPlant.class);
         intent.putExtra(EXTRA_PLANT, newPlant);
-        startActivityForResult(intent, MainActivity.PLANT_REQUEST);
+        startActivityForResult(intent, 1);
     }
 }

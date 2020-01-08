@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         if (extras != null) {
             Plant newPlant = (Plant) getIntent().getSerializableExtra(AddNewPlant.EXTRA_PLANT);
             plants.add(newPlant);
-            TextView t = findViewById(R.id.tropyTipText);
-            t.setText(String.valueOf(plants.size()));
+//            TextView t = findViewById(R.id.tropyTipText);
+//            t.setText(String.valueOf(plants.size()));
         }
     }
 
@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Plant newPlant = (Plant) data.getSerializableExtra(AddNewPlant.EXTRA_PLANT);
                 plants.add(newPlant);
-                TextView t = findViewById(R.id.tropyTipText);
-                t.setText(plants.size());
+//                TextView t = findViewById(R.id.tropyTipText);
+//                t.setText(plants.size());
             }
         }
     }
