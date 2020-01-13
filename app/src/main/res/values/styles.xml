@@ -2,13 +2,8 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
-<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-<!--        <item name="colorAccent">@color/colorAccent</item>-->
         <item name="android:textViewStyle">@font/seoge_light</item>
         <item name="android:buttonStyle">@font/seoge_light</item>
-        <button name="android:background">drawable/rounded_button.xml</button>
         <item name="android:scrollViewStyle">@font/seoge_light</item>
         <item name="android:fontFamily">@font/seoge_light</item>
         <item name="android:gravity">center</item>>
