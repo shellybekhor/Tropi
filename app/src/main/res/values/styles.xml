@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textViewStyle">@font/seoge_light</item>
         <item name="android:buttonStyle">@font/seoge_light</item>
         <item name="android:scrollViewStyle">@font/seoge_light</item>
