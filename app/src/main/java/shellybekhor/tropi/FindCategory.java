@@ -67,7 +67,7 @@ public class FindCategory extends AppCompatActivity {
 
     private void launchCreatePlant(int category){
         Intent intent = new Intent(this, AddNewPlant.class);
-        intent.putExtra(EXTRA_MESSAGE, category);
+        intent.putExtra(DefineCategory.EXTRA_CATEGORY, category);
         intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
         startActivityForResult(intent, 1);
     }

@@ -41,7 +41,7 @@ public class DefineCategory extends AppCompatActivity {
     public void findCategory(View view) { launchFindCategory(); }
 
     public void launchCreatePlant(int category){
-        Intent intent = new Intent(this, AddNewPlant.class);
+        Intent intent = new Intent(this, ChooseIconCategorizedPlant.class);
         intent.putExtra(EXTRA_CATEGORY, category);
         intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
         startActivityForResult(intent, 1);
