@@ -77,12 +77,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:background="@drawable/ic_lower_set"
+        android:layout_width="447dp"
+        android:layout_height="144dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/ic_plants_bar_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.346"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noButton" />
 

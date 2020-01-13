@@ -103,11 +103,12 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="489dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="108dp"
-        android:background="@drawable/ic_lower_set"
+        android:layout_width="455dp"
+        android:layout_height="141dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/ic_plants_bar_4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationButton" />
 
