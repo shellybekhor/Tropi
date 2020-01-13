@@ -8,6 +8,8 @@
 
     <TextView
         android:id="@+id/textView"
+        android:fontFamily="@font/seoge_light"
+
         android:layout_width="410dp"
         android:layout_height="118dp"
         android:background="@color/colorDefaultWindows"
@@ -23,6 +25,7 @@
 
     <TextView
         android:id="@+id/textView2"
+        android:fontFamily="@font/seoge_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="484dp"
@@ -34,6 +37,8 @@
 
     <TextView
         android:id="@+id/CateogoryName"
+        android:fontFamily="@font/seoge_light"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Category"

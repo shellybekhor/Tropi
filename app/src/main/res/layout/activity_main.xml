@@ -35,10 +35,10 @@
 
     <ScrollView
         android:id="@+id/plantsToDoList"
+        android:background="@drawable/rounded_button"
         android:layout_width="246dp"
         android:layout_height="343dp"
         android:layout_marginStart="28dp"
-        android:background="@color/colorDefaultWindows"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,18 +55,37 @@
 
     <Button
         android:id="@+id/addPlantButton"
-        android:layout_width="440dp"
+        android:background="@drawable/rounded_button"
+        android:layout_width="160dp"
         android:layout_height="64dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
         android:fontFamily="@font/seoge_light"
         android:onClick="addNewPlantButtonClicking"
         android:paddingStart="30dp"
-        android:text="+ add new"
+        android:text="add new +"
         android:textAlignment="textStart"
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/goToMyPlantsButton"
+        android:background="@drawable/rounded_button"
+        android:layout_width="160dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/seoge_light"
+        android:onClick="addNewPlantButtonClicking"
+        android:paddingStart="30dp"
+        android:text="my plants"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addPlantButton"
+        app:layout_constraintHorizontal_bias="0.71"
         app:layout_constraintStart_toStartOf="parent" />
 
     <HorizontalScrollView
@@ -83,22 +102,11 @@
             android:layout_height="match_parent" />
     </HorizontalScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="80px"
-        android:layout_height="80px"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        app:backgroundTint="@color/colorDefaultBackground"
-        android:background="@color/colorDefaultBackground"
-        android:color = "@color/cardview_dark_background"
-        android:text="+"
-
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/button"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="@font/seoge_light"
+        android:textSize="18dp"
         android:layout_width="127dp"
         android:layout_height="442dp"
         android:layout_marginStart="28dp"

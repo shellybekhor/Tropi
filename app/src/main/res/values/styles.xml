@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@font/seoge_light</item>
+        <item name="android:buttonStyle">@font/seoge_light</item>
+        <item name="android:scrollViewStyle">@font/seoge_light</item>
+        <item name="android:fontFamily">@font/seoge_light</item>
+        <item name="android:gravity">center</item>>
     </style>
 
 </resources>
