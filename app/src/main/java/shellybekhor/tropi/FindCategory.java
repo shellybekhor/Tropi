@@ -14,7 +14,7 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class FindCategory extends AppCompatActivity {
 
-
+    String currentUserId;
     /**
      * Current category, initialized to -1.
      */
@@ -31,7 +31,8 @@ public class FindCategory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_category);
-
+        Intent intent = getIntent();
+        currentUserId = intent.getStringExtra(MainActivity.EXTRA_USER_ID);
     }
 
     public void yesButtonOnClick(View view) {
@@ -67,6 +68,7 @@ public class FindCategory extends AppCompatActivity {
     private void launchCreatePlant(int category){
         Intent intent = new Intent(this, AddNewPlant.class);
         intent.putExtra(EXTRA_MESSAGE, category);
+        intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
         startActivityForResult(intent, 1);
     }
 

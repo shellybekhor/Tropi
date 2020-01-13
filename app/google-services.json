@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "671560998376",
+    "firebase_url": "https://tropi-d4ba1.firebaseio.com",
+    "project_id": "tropi-d4ba1",
+    "storage_bucket": "tropi-d4ba1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671560998376:android:b846810c1f525e8533585d",
+        "android_client_info": {
+          "package_name": "shellybekhor.tropi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671560998376-eard1o4cj048mdci9mf6lhma0ng5042q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "shellybekhor.tropi",
+            "certificate_hash": "b7b4666ae3291c9f00283626105e5bf966a023e8"
+          }
+        },
+        {
+          "client_id": "671560998376-hqm1fsuprbumrucfd1q6bpnitk9b1trn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBiC3W5LEq_2s1JI7LP181yDmaNYUOz4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671560998376-hqm1fsuprbumrucfd1q6bpnitk9b1trn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

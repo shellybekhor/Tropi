@@ -13,10 +13,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class AddNewPlant extends AppCompatActivity {
     private static final String LOG_TAG = AddNewPlant.class.getSimpleName();
     public static final String EXTRA_PLANT = "shellybekhor.tropi.extra.PLANT";
     int currentCategory;
+    String currentUserId;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +29,10 @@ public class AddNewPlant extends AppCompatActivity {
         setContentView(R.layout.activity_add_new_plant);
         Intent intent = getIntent();
         int category = intent.getIntExtra(DefineCategory.EXTRA_CATEGORY, 0);
+        currentUserId = intent.getStringExtra(MainActivity.EXTRA_USER_ID);
         currentCategory = category;
         Log.d(LOG_TAG, String.valueOf(category));
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     public void plantDone(View view){
@@ -54,11 +61,10 @@ public class AddNewPlant extends AppCompatActivity {
                 newPlant = null;
         }
 
-//        Intent intent = new Intent(this, MainActivity.class);
-//        intent.putExtra(EXTRA_PLANT, newPlant);
-//        startActivityForResult(intent, MainActivity.PLANT_REQUEST);
+        String key = mDatabase.child(currentUserId).push().getKey();
+        mDatabase.child(currentUserId).child(key).setValue(newPlant);
 
-        Intent intent = new Intent(this, ChooseIconCategorizedPlant.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(EXTRA_PLANT, newPlant);
         startActivityForResult(intent, 1);
     }

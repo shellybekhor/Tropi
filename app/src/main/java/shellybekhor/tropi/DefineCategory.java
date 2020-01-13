@@ -16,11 +16,14 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 public class DefineCategory extends AppCompatActivity {
 
     public static final String EXTRA_CATEGORY = "shellybekhor.tropi.extra.CATEGORY";
+    String currentUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_define_category);
+        Intent intent = getIntent();
+        currentUserId = intent.getStringExtra(MainActivity.EXTRA_USER_ID);
     }
 
     public void createSucculent(View view){
@@ -39,13 +42,15 @@ public class DefineCategory extends AppCompatActivity {
 
     public void launchCreatePlant(int category){
         Intent intent = new Intent(this, AddNewPlant.class);
-        intent.putExtra(EXTRA_MESSAGE, category);
+        intent.putExtra(EXTRA_CATEGORY, category);
+        intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
         startActivityForResult(intent, 1);
 
     }
 
     public void launchFindCategory() {
         Intent intent = new Intent(this, FindCategory.class);
+        intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
         startActivityForResult(intent, 1);
     }
 

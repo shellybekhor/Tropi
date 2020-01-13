@@ -72,12 +72,12 @@
 
     <Button
         android:id="@+id/goToMyPlantsButton"
-        android:background="@drawable/rounded_gray_button"
         android:layout_width="160dp"
         android:layout_height="64dp"
         android:layout_marginBottom="24dp"
+        android:background="@drawable/rounded_gray_button"
         android:fontFamily="@font/seoge_light"
-        android:onClick="addNewPlantButtonClicking"
+        android:onClick="goToMyPlants"
         android:paddingStart="30dp"
         android:text="my plants"
         android:textAlignment="textStart"
