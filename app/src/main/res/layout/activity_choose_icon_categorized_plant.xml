@@ -8,18 +8,20 @@
 
     <TextView
         android:id="@+id/textView"
-        android:fontFamily="@font/seoge_light"
-
         android:layout_width="410dp"
-        android:layout_height="118dp"
+
+        android:layout_height="80dp"
         android:background="@color/colorDefaultWindows"
+        android:fontFamily="@font/seoge_light"
         android:gravity="bottom"
         android:text="New Plant"
         android:textAlignment="center"
+        android:paddingBottom="5dp"
         android:textAllCaps="true"
         android:textSize="24sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
