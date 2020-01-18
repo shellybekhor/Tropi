@@ -10,9 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
-public class FindCategory extends AppCompatActivity {
+public class FindCategoryActivity extends AppCompatActivity {
 
     String currentUserId;
     /**
@@ -67,7 +65,7 @@ public class FindCategory extends AppCompatActivity {
 
     private void launchCreatePlant(int category){
         Intent intent = new Intent(this, AddNewPlant.class);
-        intent.putExtra(DefineCategory.EXTRA_CATEGORY, category);
+        intent.putExtra(ChooseCategoryActivity.EXTRA_CATEGORY, category);
         intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
         startActivityForResult(intent, 1);
     }

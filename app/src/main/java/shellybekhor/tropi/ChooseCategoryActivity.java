@@ -3,7 +3,6 @@ package shellybekhor.tropi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import shellybekhor.tropi.Plants.Succulent;
-import shellybekhor.tropi.Plants.Special;
 import shellybekhor.tropi.Plants.Spices;
 import shellybekhor.tropi.Plants.Tropic;
 
@@ -11,9 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
-public class DefineCategory extends AppCompatActivity {
+public class ChooseCategoryActivity extends AppCompatActivity {
 
     public static final String EXTRA_CATEGORY = "shellybekhor.tropi.extra.CATEGORY";
     String currentUserId;
@@ -21,7 +18,7 @@ public class DefineCategory extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_define_category);
+        setContentView(R.layout.activity_choose_category);
         Intent intent = getIntent();
         currentUserId = intent.getStringExtra(MainActivity.EXTRA_USER_ID);
     }
@@ -49,7 +46,7 @@ public class DefineCategory extends AppCompatActivity {
     }
 
     public void launchFindCategory() {
-        Intent intent = new Intent(this, FindCategory.class);
+        Intent intent = new Intent(this, FindCategoryActivity.class);
         intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
         startActivityForResult(intent, 1);
     }

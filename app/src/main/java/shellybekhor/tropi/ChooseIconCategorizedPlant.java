@@ -5,21 +5,11 @@ import shellybekhor.tropi.Plants.Spices;
 import shellybekhor.tropi.Plants.Succulent;
 import shellybekhor.tropi.Plants.Tropic;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-
-import com.google.android.gms.common.SignInButton;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class ChooseIconCategorizedPlant extends AppCompatActivity {
 
@@ -40,7 +30,7 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_icon_categorized_plant);
         Intent intent = getIntent();
-        int category = intent.getIntExtra(DefineCategory.EXTRA_CATEGORY, 0);
+        int category = intent.getIntExtra(ChooseCategoryActivity.EXTRA_CATEGORY, 0);
         currentUserId = intent.getStringExtra(MainActivity.EXTRA_USER_ID);
         currentCategory = category;
         setCatagory();
@@ -75,8 +65,8 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
     }
 
     public void launchPlantInfo(int icon){
-        Intent intent = new Intent(this, PlantInfo.class);
-        intent.putExtra(DefineCategory.EXTRA_CATEGORY, currentCategory);
+        Intent intent = new Intent(this, PlantInfoActivity.class);
+        intent.putExtra(ChooseCategoryActivity.EXTRA_CATEGORY, currentCategory);
         intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
         intent.putExtra(EXTRA_ICON, icon);
         startActivityForResult(intent, 1);

@@ -3,7 +3,6 @@ package shellybekhor.tropi;
 import androidx.appcompat.app.AppCompatActivity;
 import shellybekhor.tropi.Plants.Plant;
 import shellybekhor.tropi.Plants.Succulent;
-import shellybekhor.tropi.Plants.Special;
 import shellybekhor.tropi.Plants.Spices;
 import shellybekhor.tropi.Plants.Tropic;
 
@@ -28,7 +27,7 @@ public class AddNewPlant extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_plant);
         Intent intent = getIntent();
-        int category = intent.getIntExtra(DefineCategory.EXTRA_CATEGORY, 0);
+        int category = intent.getIntExtra(ChooseCategoryActivity.EXTRA_CATEGORY, 0);
         currentUserId = intent.getStringExtra(MainActivity.EXTRA_USER_ID);
         currentCategory = category;
         Log.d(LOG_TAG, String.valueOf(category));

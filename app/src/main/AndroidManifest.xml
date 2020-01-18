@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PlantInfo"></activity>
+        <activity android:name=".PlantInfoActivity"></activity>
         <activity android:name=".ChooseIconCategorizedPlant" />
         <activity
             android:name=".ui.login.LoginActivity"
@@ -32,10 +32,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ChooseIconCategorizedPlant"></activity>
-        <activity android:name=".FindCategory" />
+        <activity android:name=".FindCategoryActivity" />
         <activity android:name=".MyPlantsActivity" />
-        <activity android:name=".DefineCategory" />
+        <activity android:name=".ChooseCategoryActivity" />
         <activity android:name=".AddNewPlant" />
         <activity android:name=".MainActivity">
             <intent-filter>

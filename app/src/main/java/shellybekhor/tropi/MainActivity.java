@@ -7,7 +7,6 @@ import shellybekhor.tropi.ui.login.LoginActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
     String currentUserId;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -45,12 +43,8 @@ public class MainActivity extends AppCompatActivity {
         if (extras != null) {
             Plant newPlant = (Plant) getIntent().getSerializableExtra(AddNewPlant.EXTRA_PLANT);
             plants.add(newPlant);
-//            TextView t = findViewById(R.id.tropyTipText);
-//            t.setText(String.valueOf(plants.size()));
         }
-
         connectUser();
-
     }
 
     private void connectUser() {
@@ -84,20 +78,6 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("The read failed: " + databaseError.getCode());
                 }
             });
-
-//            ValueEventListener plantListener = new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    plants.add(dataSnapshot.getValue(Plant.class));
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//                    System.out.println("loadPost:onCancelled" + databaseError.toException());
-//                }
-//            };
-//            userDB.addValueEventListener(plantListener);
-
         }
     }
 
@@ -110,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
      * Takes us to the add new plant activity.
      */
     public void addNewPlantButtonClicking(View view) {
-        Intent intent = new Intent(this, DefineCategory.class);
+        Intent intent = new Intent(this, ChooseCategoryActivity.class);
         intent.putExtra(EXTRA_USER_ID, currentUserId);
         startActivityForResult(intent, PLANT_REQUEST);
     }
