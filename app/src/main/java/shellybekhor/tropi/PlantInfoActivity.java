@@ -50,6 +50,7 @@ public class PlantInfoActivity extends AppCompatActivity {
 
     public void launchMyPlants(View view){
         Intent intent = new Intent(this, MyPlantsActivity.class);
+        intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
         startActivity(intent);
     }
 

@@ -1,6 +1,9 @@
 package shellybekhor.tropi.Plants;
 
 import java.io.Serializable;
+
+import shellybekhor.tropi.R;
+
 /**
  * This class is the plant abstract class.
  * Each plant is defined by its a category and treatment.
@@ -14,6 +17,7 @@ public class Plant implements Serializable {
     public String _houseLocation;
     public String _kind;
     public String _nickname;
+    public static final String[] CATEGORIES = {"Succulent", "Tropic", "Spice"};
 
 
     public Plant(){

@@ -13,9 +13,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class ChooseIconCategorizedPlant extends AppCompatActivity {
 
+    private DatabaseReference mDatabase;
     int currentCategory;
+    String currentCatName;
     String currentUserId;
     public static final String EXTRA_ICON = "shellybekhor.tropi.extra.ICON";
     int[] succulentsIcons = {R.drawable.ic_cactus1, R.drawable.ic_cactus2, R.drawable.ic_cactus3,
@@ -36,6 +44,8 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
         currentUserId = intent.getStringExtra(MainActivity.EXTRA_USER_ID);
         currentCategory = category;
         setCatagory();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     private void setCatagory(){
@@ -44,14 +54,17 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
         switch (currentCategory){
             case Succulent.CATEGORY:
                 text.setText(R.string.Succulent);
+                currentCatName = getResources().getString(R.string.Succulent);
                 defineIcons(succulentsIcons);
                 break;
             case Tropic.CATEGORY:
                 text.setText(R.string.Tropic);
+                currentCatName = getResources().getString(R.string.Tropic);
                 defineIcons(spicesIcons);
                 break;
             case Spices.CATEGORY:
                 text.setText(R.string.Spice);
+                currentCatName = getResources().getString(R.string.Spice);
                 defineIcons(tropicalsIcons);
                 break;
         }
@@ -67,11 +80,17 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     int icon = (int) v.getTag();
+                    addPlantToDB(icon, currentCatName);
                     launchPlantInfo(icon);
                 }
             });
             iconsScroll.addView(singleIcon);
         }
+    }
+
+    private void addPlantToDB(int chosenIcon, String categoryName){
+        DatabaseReference categoryRef = mDatabase.child(currentUserId).child(categoryName);
+        categoryRef.push().setValue(chosenIcon);
     }
 
     public void launchPlantInfo(int icon){

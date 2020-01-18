@@ -67,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
             userDB.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (String cat: Plant.CATEGORIES){
+                        if (dataSnapshot.hasChild(cat)){
+                            for (DataSnapshot ds: dataSnapshot.getChildren()){
+//                                int icon = ds.getValue(Integer.class);
+                            }
+                        }
+                    }
+
                     for (DataSnapshot ds: dataSnapshot.getChildren()){
                         plants.add(ds.getValue(Plant.class));
                     }
