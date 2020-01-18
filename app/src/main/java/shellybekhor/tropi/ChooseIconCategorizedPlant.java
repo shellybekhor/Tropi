@@ -6,7 +6,9 @@ import shellybekhor.tropi.Plants.Succulent;
 import shellybekhor.tropi.Plants.Tropic;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,15 +43,15 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
 
         switch (currentCategory){
             case Succulent.CATEGORY:
-                text.setText("Succulent");
+                text.setText(R.string.Succulent);
                 defineIcons(succulentsIcons);
                 break;
             case Tropic.CATEGORY:
-                text.setText("Tropic");
+                text.setText(R.string.Tropic);
                 defineIcons(spicesIcons);
                 break;
             case Spices.CATEGORY:
-                text.setText("Spices");
+                text.setText(R.string.Spice);
                 defineIcons(tropicalsIcons);
                 break;
         }
@@ -60,6 +62,14 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
         for (int i: icons){
             ImageView singleIcon = new ImageView(this);
             singleIcon.setBackgroundResource(i);
+            singleIcon.setTag(i);
+            singleIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int icon = (int) v.getTag();
+                    launchPlantInfo(icon);
+                }
+            });
             iconsScroll.addView(singleIcon);
         }
     }

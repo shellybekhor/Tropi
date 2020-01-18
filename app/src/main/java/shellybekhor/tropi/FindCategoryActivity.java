@@ -36,25 +36,23 @@ public class FindCategoryActivity extends AppCompatActivity {
     public void yesButtonOnClick(View view) {
         if (phase == 0) {
             category = Succulent.CATEGORY;
-            launchCreatePlant(category);
         } else if (phase == 1) {
             category = Tropic.CATEGORY;
-            launchCreatePlant(category);
         } else if (phase == 2) {
             category = Spices.CATEGORY;
-            launchCreatePlant(category);
         }
+        launchCreatePlant(category);
     }
 
     public void noButtonOnClick(View view) {
         if (phase == 0) {
             phase = 1;
-            TextView question = (TextView) findViewById(R.id.categoryQuestion);
+            TextView question = findViewById(R.id.categoryQuestion);
             question.setText(R.string.categoryQuestion2);
         }
         else if (phase == 1) {
             phase = 2;
-            TextView question = (TextView) findViewById(R.id.categoryQuestion);
+            TextView question = findViewById(R.id.categoryQuestion);
             question.setText(R.string.categoryQuestion3);
         }
         else if (phase == 2) {
@@ -64,7 +62,7 @@ public class FindCategoryActivity extends AppCompatActivity {
     }
 
     private void launchCreatePlant(int category){
-        Intent intent = new Intent(this, AddNewPlant.class);
+        Intent intent = new Intent(this, ChooseIconCategorizedPlant.class);
         intent.putExtra(ChooseCategoryActivity.EXTRA_CATEGORY, category);
         intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
         startActivityForResult(intent, 1);

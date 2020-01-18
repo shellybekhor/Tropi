@@ -2,8 +2,13 @@
     <string name="app_name">Tropi</string>
 
     <string name="Succulent">Succulent</string>
+    <string name="SucculentInfo">Succulent is super smart</string>
+
     <string name="Tropic">Tropic</string>
+    <string name="TropicInfo">Tropic is a great friend!</string>
+
     <string name="Spice">Spice</string>
+    <string name="SpiceInfo">Make a tea from your spices</string>
 
     <string name="yesButton">YES</string>
     <string name="noButton">NO</string>
