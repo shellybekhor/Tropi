@@ -135,45 +135,52 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-                mAuth.signInWithEmailAndPassword(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString())
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "signInWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    launchMainActivity();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    mAuth.createUserWithEmailAndPassword(usernameEditText.getText().toString(),
-                                            passwordEditText.getText().toString())
-                                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                                    if (task.isSuccessful()) {
-                                                        // Sign in success, update UI with the signed-in user's information
-                                                        Log.d(TAG, "createUserWithEmail:success");
-                                                        FirebaseUser user = mAuth.getCurrentUser();
-                                                        launchMainActivity();
-                                                    } else {
-                                                        // If sign in fails, display a message to the user.
-                                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                                    }
-                                                }
-                                            });
-                                }
-                            }
-                        });
+                String email = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                loginViewModel.login(email, password);
+                signIn(email, password);
             }
         });
 
         mAuth = FirebaseAuth.getInstance();
         FacebookAuth();
+    }
+
+    private void signIn(final String email, final String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            finish();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            createAccount(email, password);
+                        }
+                    }
+                });
+    }
+
+    private void createAccount(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            finish();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        }
+                    }
+                });
     }
 
     private void updateUiWithUser(LoggedInUserView model) {

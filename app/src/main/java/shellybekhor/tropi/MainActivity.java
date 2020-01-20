@@ -7,6 +7,7 @@ import shellybekhor.tropi.ui.login.LoginActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ScrollView;
 
 import com.facebook.AccessToken;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,8 +17,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 
 /**
@@ -29,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_USER_ID = "shellybekhor.tropi.extra.USERID";
     public static final int PLANT_REQUEST = 0;
-    ArrayList<Plant> plants = new ArrayList<>();
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     String currentUserId;
@@ -39,11 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            Plant newPlant = (Plant) getIntent().getSerializableExtra(AddNewPlant.EXTRA_PLANT);
-            plants.add(newPlant);
-        }
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         connectUser();
@@ -71,18 +64,18 @@ public class MainActivity extends AppCompatActivity {
             userDB.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    boolean noPlants = true;
                     for (String cat: Plant.CATEGORIES){
                         if (dataSnapshot.hasChild(cat)){
+                            noPlants = false;
                             for (DataSnapshot ds: dataSnapshot.getChildren()){
 //                                int icon = ds.getValue(Integer.class);
                             }
                         }
                     }
-
-                    for (DataSnapshot ds: dataSnapshot.getChildren()){
-                        plants.add(ds.getValue(Plant.class));
+                    if (noPlants){
+                        setEmptyCheckList();
                     }
-                    System.out.println(plants);
                 }
 
                 @Override
@@ -91,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void setEmptyCheckList() {
+        ScrollView toDoList = findViewById(R.id.plantsToDoList);
+        toDoList.setBackgroundResource(R.drawable.ic_nothing_to_do);
     }
 
     private boolean checkIfUserLoggedInFacebook(){
