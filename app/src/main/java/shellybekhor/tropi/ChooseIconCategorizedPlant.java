@@ -1,6 +1,7 @@
 package shellybekhor.tropi;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import shellybekhor.tropi.Plants.Spices;
 import shellybekhor.tropi.Plants.Succulent;
 import shellybekhor.tropi.Plants.Tropic;
@@ -30,10 +31,10 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
             R.drawable.ic_succulent1, R.drawable.ic_succulent2, R.drawable.ic_senecio,
             R.drawable.ic_sansiveria};
     int[] spicesIcons = {R.drawable.ic_basil, R.drawable.ic_cherry_tomato, R.drawable.ic_mint,
-            R.drawable.ic_oregano, R.drawable.ic_lettuce};
+            R.drawable.ic_oregano, R.drawable.ic_lettuce, R.drawable.ic_avocado};
     int[] tropicalsIcons = {R.drawable.ic_boston_fern, R.drawable.ic_syngonium,
-            R.drawable.ic_birdsnest, R.drawable.ic_ornata, R.drawable.ic_pothos};
-
+            R.drawable.ic_birdsnest, R.drawable.ic_ornata, R.drawable.ic_pothos,
+            R.drawable.ic_banana, R.drawable.ic_rubber_ficcus, R.drawable.ic_monstera};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +49,10 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    private void setCatagory(){
+    private void setCatagory() {
         TextView text = findViewById(R.id.CateogoryName);
 
-        switch (currentCategory){
+        switch (currentCategory) {
             case Succulent.CATEGORY:
                 text.setText(R.string.Succulent);
                 currentCatName = getResources().getString(R.string.Succulent);
@@ -70,9 +71,9 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
         }
     }
 
-    private void defineIcons(int[] icons){
+    private void defineIcons(int[] icons) {
         LinearLayout iconsScroll = findViewById(R.id.layoutScroll);
-        for (int i: icons){
+        for (int i : icons) {
             ImageView singleIcon = new ImageView(this);
             singleIcon.setBackgroundResource(i);
             singleIcon.setTag(i);
@@ -88,12 +89,12 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
         }
     }
 
-    private void addPlantToDB(int chosenIcon, String categoryName){
+    private void addPlantToDB(int chosenIcon, String categoryName) {
         DatabaseReference categoryRef = mDatabase.child(currentUserId).child(categoryName);
         categoryRef.push().setValue(chosenIcon);
     }
 
-    public void launchPlantInfo(int icon){
+    public void launchPlantInfo(int icon) {
         Intent intent = new Intent(this, PlantInfoActivity.class);
         intent.putExtra(ChooseCategoryActivity.EXTRA_CATEGORY, currentCategory);
         intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);

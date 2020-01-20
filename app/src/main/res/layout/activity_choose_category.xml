@@ -61,7 +61,7 @@
         android:background="@drawable/rounded_green_button"
         android:backgroundTint="@color/colorPrimaryGreen"
         android:onClick="createSucculent"
-        android:text="socculent"
+        android:text="succulent"
         android:textColor="@color/colorText"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/locationButton"
