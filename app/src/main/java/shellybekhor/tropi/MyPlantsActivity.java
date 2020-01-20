@@ -94,6 +94,6 @@ public class MyPlantsActivity extends AppCompatActivity {
 
     public void launchMainActivity(View view){
         Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 }

@@ -44,20 +44,24 @@ public class MainActivity extends AppCompatActivity {
             Plant newPlant = (Plant) getIntent().getSerializableExtra(AddNewPlant.EXTRA_PLANT);
             plants.add(newPlant);
         }
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
         connectUser();
-    }
-
-    private void connectUser() {
-        if (!checkIfUserLoggedInFacebook()){
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivityForResult(intent, PLANT_REQUEST);
-        }
         getPlantsDatabase();
     }
 
+    private void connectUser() {
+        if (!checkIfUserLoggedInFacebook() && mAuth.getCurrentUser() == null){
+            launchLoginActivity();
+        }
+    }
+
+    private void launchLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
     private void getPlantsDatabase() {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             currentUserId = currentUser.getUid();
@@ -107,6 +111,17 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MyPlantsActivity.class);
         intent.putExtra(EXTRA_USER_ID, currentUserId);
         startActivity(intent);
+    }
+
+    public void signOut(View view){
+        mAuth.signOut();
+        launchLoginActivity();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        getPlantsDatabase();
     }
 
 }

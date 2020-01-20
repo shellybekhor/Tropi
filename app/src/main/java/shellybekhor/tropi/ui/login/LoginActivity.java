@@ -30,6 +30,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -89,12 +90,13 @@ public class LoginActivity extends AppCompatActivity {
                     showLoginFailed(loginResult.getError());
                 }
                 if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
+//                    launchMainActivity();
+//                    updateUiWithUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-                finish();
+//                finish();
             }
         });
 
@@ -135,12 +137,43 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
+                mAuth.signInWithEmailAndPassword(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString())
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    launchMainActivity();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                    mAuth.createUserWithEmailAndPassword(usernameEditText.getText().toString(),
+                                            passwordEditText.getText().toString())
+                                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                    if (task.isSuccessful()) {
+                                                        // Sign in success, update UI with the signed-in user's information
+                                                        Log.d(TAG, "createUserWithEmail:success");
+                                                        FirebaseUser user = mAuth.getCurrentUser();
+                                                        launchMainActivity();
+                                                    } else {
+                                                        // If sign in fails, display a message to the user.
+                                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                                    }
+                                                }
+                                            });
+                                }
+                            }
+                        });
             }
         });
 
         mAuth = FirebaseAuth.getInstance();
         FacebookAuth();
-
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
@@ -205,24 +238,5 @@ public class LoginActivity extends AppCompatActivity {
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential);
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            Log.d(TAG, "signInWithCredential:success");
-//                            FirebaseUser user = mAuth.getCurrentUser();
-////                            updateUI(user);
-//                        }
-////                        else {
-////                            // If sign in fails, display a message to the user.
-////                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-////                            Toast.makeText(FacebookLoginActivity.this, "Authentication failed.",
-////                                    Toast.LENGTH_SHORT).show();
-////                            updateUI(null);
-////                        }
-//                    }
-//                });
     }
-
 }
