@@ -4,11 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import shellybekhor.tropi.Plants.Plant;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -94,6 +100,54 @@ public class MyPlantsActivity extends AppCompatActivity {
     private void setNoPlants(){
         Button addNewPlant = findViewById(R.id.addPlantButton2);
         addNewPlant.setVisibility(View.VISIBLE);
+        View s1 = findViewById(R.id.shelf1);
+        s1.setVisibility(View.INVISIBLE);
+        View s2 = findViewById(R.id.shelf2);
+        s2.setVisibility(View.INVISIBLE);
+        View s3 = findViewById(R.id.shelf3);
+        s3.setVisibility(View.INVISIBLE);
+
         //TODO: set backgrounds and text "all of this can be yours"
+    }
+
+    public void infoPopUp(View view){
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.info_popup, null);
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        TextView textView = popupWindow.getContentView().findViewById(R.id.popupText);
+        setInfoText(view.getId(), textView);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            popupWindow.setElevation(20);
+        }
+        // show the popup window
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }
+
+    private void setInfoText(int viewId, TextView text) {
+        switch(viewId){
+            case R.id.info_succulent:
+                text.setText(R.string.SucculentInfo);
+                break;
+            case R.id.info_spices:
+                text.setText(R.string.SpiceInfo);
+                break;
+            case R.id.info_tropical:
+                text.setText(R.string.TropicInfo);
+                break;
+        }
     }
 }

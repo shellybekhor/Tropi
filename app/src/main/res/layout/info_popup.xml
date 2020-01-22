@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/popupText"
+        android:layout_width="268dp"
+        android:layout_height="218dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="30dp"
+        android:background="@drawable/rounded_green_button"
+        android:text="@string/TropicInfo"
+        android:textColor="@color/colorText"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="22sp" />
+
+
+</LinearLayout>
