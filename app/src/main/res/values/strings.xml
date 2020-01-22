@@ -28,5 +28,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="facebook_app_id">2470114149766257</string>
     <string name="fb_login_protocol_scheme">fb2470114149766257</string>
+    <string name="tropi_tip">check if your plants are dry every 2 days</string>
+    <string name="tip_title">Tropi  \nTip</string>
 
 </resources>

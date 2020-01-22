@@ -7,7 +7,6 @@ import shellybekhor.tropi.Plants.Succulent;
 import shellybekhor.tropi.Plants.Tropic;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,9 +15,6 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ChooseIconCategorizedPlant extends AppCompatActivity {
 
@@ -72,7 +68,7 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
     }
 
     private void defineIcons(int[] icons) {
-        LinearLayout iconsScroll = findViewById(R.id.layoutScroll);
+        LinearLayout iconsScroll = findViewById(R.id.layoutScrollIcons);
         for (int i : icons) {
             ImageView singleIcon = new ImageView(this);
             singleIcon.setBackgroundResource(i);

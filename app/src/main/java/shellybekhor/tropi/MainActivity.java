@@ -7,7 +7,11 @@ import shellybekhor.tropi.ui.login.LoginActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     String currentUserId;
+    boolean tipOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,4 +127,19 @@ public class MainActivity extends AppCompatActivity {
         getPlantsDatabase();
     }
 
+    public void openTropiTip(View view){
+        TextView text = (TextView) view;
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        if (tipOpen) {
+            params.width -= 170;
+            text.setText(R.string.tip_title);
+            tipOpen = false;
+        }
+        else{
+            params.width += 170;
+            text.setText(R.string.tropi_tip);
+            tipOpen = true;
+        }
+        view.setLayoutParams(params);
+    }
 }
