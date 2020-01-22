@@ -2,11 +2,17 @@ package shellybekhor.tropi;
 
 import androidx.appcompat.app.AppCompatActivity;
 import shellybekhor.tropi.Plants.Plant;
+import shellybekhor.tropi.Plants.Spices;
+import shellybekhor.tropi.Plants.Succulent;
+import shellybekhor.tropi.Plants.Task;
+import shellybekhor.tropi.Plants.Tropic;
 import shellybekhor.tropi.ui.login.LoginActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +27,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -73,9 +83,8 @@ public class MainActivity extends AppCompatActivity {
                     for (String cat: Plant.CATEGORIES){
                         if (dataSnapshot.hasChild(cat)){
                             noPlants = false;
-                            for (DataSnapshot ds: dataSnapshot.getChildren()){
-//                                int icon = ds.getValue(Integer.class);
-                            }
+                            setTask(cat);
+//                            System.out.println("hi");
                         }
                     }
                     if (noPlants){
@@ -90,6 +99,61 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
+    private void setTask(String categoryName) {
+        int id;
+        int glassesOfWater;
+        int daysBetweenWatering;
+        Calendar lastWateingDate;
+        switch (categoryName)
+        {
+            case "Succulent":
+//                id = 0;
+                glassesOfWater = Succulent.GLASSES_PER_WATERING;
+                daysBetweenWatering = Succulent.WATER_EVERY_X_DAYS;
+                lastWateingDate = Succulent.getLastWatering();
+                break;
+            case "Tropic":
+//                id = 1;
+                glassesOfWater = Tropic.GLASSES_PER_WATERING;
+                daysBetweenWatering = Tropic.WATER_EVERY_X_DAYS;
+                lastWateingDate = Tropic.getLastWatering();
+                break;
+            case "Spice":
+//                id = 2;
+                glassesOfWater = Spices.GLASSES_PER_WATERING;
+                daysBetweenWatering = Spices.WATER_EVERY_X_DAYS;
+                lastWateingDate = Spices.getLastWatering();
+                break;
+            default:
+//                id = 0;
+                glassesOfWater = Succulent.GLASSES_PER_WATERING;
+                daysBetweenWatering = Tropic.WATER_EVERY_X_DAYS;
+                lastWateingDate = Succulent.getLastWatering();
+        }
+
+        // if today is the day - create task and add it
+        Calendar todayDate = Calendar.getInstance();
+        if (lastWateingDate == null) {
+            lastWateingDate = todayDate;
+        }
+        long diff = todayDate.getTimeInMillis() - lastWateingDate.getTimeInMillis();
+        float daysDiff = (float) diff / (24 * 60 * 60 * 1000);
+        if ((daysDiff >= daysBetweenWatering) || (daysDiff == 0)) {
+            Task task = new Task(categoryName, glassesOfWater);
+            addTaskToScroll(task);
+        }
+    }
+
+    private void addTaskToScroll(Task task) {
+        LinearLayout toDoList = findViewById(R.id.tasksLinear);
+        TextView text = new TextView(this);
+        text.setBackgroundResource(R.drawable.gradient_tropi);
+        text.setText(task._taskText);
+        toDoList.addView(text);
+    }
+
+
 
     private void setEmptyCheckList() {
         ScrollView toDoList = findViewById(R.id.plantsToDoList);
