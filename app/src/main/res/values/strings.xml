@@ -2,13 +2,17 @@
     <string name="app_name">Tropi</string>
 
     <string name="Succulent">Succulent</string>
-    <string name="SucculentInfo">Succulent is super smart</string>
+    <string name="SucculentInfo">Succulent are desert plants, loves very little water.
+        Multiply watering can make them rotting in their roots. On the other hand,
+        lots of sun will make them happy and bring interesting colors! </string>
 
     <string name="Tropic">Tropic</string>
-    <string name="TropicInfo">Tropic is a great friend!</string>
+    <string name="TropicInfo">Tropic plants usually grows in jungles, under the shades of
+         big trees, hence they will love a light room but not under direct sun. They like
+        water but wont suffer from over watering. </string>
 
     <string name="Spice">Spice</string>
-    <string name="SpiceInfo">Make a tea from your spices</string>
+    <string name="SpiceInfo">Spices are super fun and tasty. They love lots of water and sun. </string>
 
     <string name="yesButton">YES</string>
     <string name="noButton">NO</string>

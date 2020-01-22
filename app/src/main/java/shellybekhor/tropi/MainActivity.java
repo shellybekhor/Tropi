@@ -11,11 +11,8 @@ import shellybekhor.tropi.ui.login.LoginActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -28,9 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Random;
 
 
 /**
@@ -42,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_USER_ID = "shellybekhor.tropi.extra.USERID";
     public static final int PLANT_REQUEST = 0;
+    public static final int TIP_WIDTH = 170;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     String currentUserId;
@@ -195,15 +192,27 @@ public class MainActivity extends AppCompatActivity {
         TextView text = (TextView) view;
         ViewGroup.LayoutParams params = view.getLayoutParams();
         if (tipOpen) {
-            params.width -= 170;
+            params.width -= TIP_WIDTH;
             text.setText(R.string.tip_title);
             tipOpen = false;
         }
         else{
-            params.width += 170;
-            text.setText(R.string.tropi_tip);
+            params.width += TIP_WIDTH;
+            text.setText(randomTip());
             tipOpen = true;
         }
         view.setLayoutParams(params);
+    }
+
+    private String randomTip(){
+        Random r = new Random();
+        String[] tips = {"You can water with a sprinkler!",
+            "Sometimes clean your plants from dust, it makes them happier",
+            "Don't forget to cut the dead leaves",
+            "Take your plants to the sun for a few minutes sometimes",
+            "You can change some twigs with your friends",
+            "You can water with distilled water sometimes"};
+        int i = r.nextInt(tips.length);
+        return tips[i];
     }
 }
