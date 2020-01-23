@@ -11,8 +11,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
         currentTasks.put("Spice", 0);
         connectUser();
         getPlantsDatabase();
+        addListenerOnTasks();
     }
+
 
     private void connectUser() {
         if (!checkIfUserLoggedInFacebook() && mAuth.getCurrentUser() == null){
@@ -103,6 +108,83 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void addListenerOnTasks() {
+        succulentCategoryListener(R.id.checkboxSucculent);
+        tropicCategoryListener(R.id.checkboxTropic);
+        spicesCategoryListener(R.id.checkboxSpices);
+    }
+
+    private void succulentCategoryListener(int checkBoxId) {
+        final CheckBox checkBox = findViewById(checkBoxId);
+        checkBox.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    Toast.makeText(MainActivity.this,
+                            "Well done!", Toast.LENGTH_LONG).show();
+                     v.setVisibility(View.INVISIBLE);
+                    final TextView text = findViewById(R.id.taskTextSucculent);
+                    text.setVisibility(View.INVISIBLE);
+                    if (isEmptyCheckList()) {
+                        setEmptyCheckList();
+                    }
+                }
+            }
+        });
+    }
+
+    private void tropicCategoryListener(int checkBoxId) {
+        final CheckBox checkBox = findViewById(checkBoxId);
+        checkBox.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    Toast.makeText(MainActivity.this,
+                            "Well done!", Toast.LENGTH_LONG).show();
+                    v.setVisibility(View.INVISIBLE);
+                    final TextView text = findViewById(R.id.taskTextTropic);
+                    text.setVisibility(View.INVISIBLE);
+                    if (isEmptyCheckList()) {
+                        setEmptyCheckList();
+                    }
+                }
+            }
+        });
+    }
+
+    private void spicesCategoryListener(int checkBoxId) {
+        final CheckBox checkBox = findViewById(checkBoxId);
+        checkBox.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    Toast.makeText(MainActivity.this,
+                            "Well done!", Toast.LENGTH_LONG).show();
+                    v.setVisibility(View.INVISIBLE);
+                    final TextView text = findViewById(R.id.taskTextSpices);
+                    text.setVisibility(View.INVISIBLE);
+                    if (isEmptyCheckList()) {
+                        setEmptyCheckList();
+                    }
+                }
+            }
+        });
+    }
+
+    private boolean isEmptyCheckList() {
+        View succulentCheckBox = findViewById(R.id.checkboxSucculent);
+        View tropicCheckBox = findViewById(R.id.checkboxTropic);
+        View spicesCheckBox = findViewById(R.id.checkboxSpices);
+
+        return ((succulentCheckBox.getVisibility() == View.INVISIBLE) &&
+                (tropicCheckBox.getVisibility() == View.INVISIBLE) &&
+                (spicesCheckBox.getVisibility() == View.INVISIBLE));
+    }
+
+
     private void setTask(String categoryName) {
 
         if (currentTasks.get(categoryName) == 1) { return; }
@@ -134,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
 
         // if today is the day - create task and add it
         // todo - fix logic with dates.
-
         Calendar todayDate = Calendar.getInstance();
         if (lastWateingDate == null) {
             lastWateingDate = todayDate;
@@ -148,29 +229,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void accomplishTask() {
-
-    }
 
     private void addTaskToScroll(Task task) {
-//        LinearLayout toDoList = findViewById(R.id.allTasksLinear);
-        boolean isChecked = false;
+        LinearLayout toDoList = findViewById(R.id.allTasksLinear);
         if (task._categoryName.equals(getResources().getString(R.string.Succulent))) {
+            toDoList.setVisibility(View.VISIBLE);
             View cb = findViewById(R.id.checkboxSucculent);
-            TextView text = findViewById(R.id.taskTextSucculent);
             cb.setVisibility(View.VISIBLE);
+            TextView text = findViewById(R.id.taskTextSucculent);
             text.setText(task._taskText);
         }
         else if (task._categoryName.equals(getResources().getString(R.string.Tropic))) {
+            toDoList.setVisibility(View.VISIBLE);
             View cb = findViewById(R.id.checkboxSucculent);
-            TextView text = findViewById(R.id.taskTextSucculent);
             cb.setVisibility(View.VISIBLE);
+            TextView text = findViewById(R.id.taskTextSucculent);
             text.setText(task._taskText);
         }
         else {
+            toDoList.setVisibility(View.VISIBLE);
             View cb = findViewById(R.id.checkboxSucculent);
-            TextView text = findViewById(R.id.taskTextSucculent);
             cb.setVisibility(View.VISIBLE);
+            TextView text = findViewById(R.id.taskTextSucculent);
             text.setText(task._taskText);
         }
     }
@@ -178,6 +258,8 @@ public class MainActivity extends AppCompatActivity {
     private void setEmptyCheckList() {
         ScrollView toDoList = findViewById(R.id.plantsToDoList);
         toDoList.setBackgroundResource(R.drawable.ic_nothing_to_do_text);
+        View tasks = findViewById(R.id.allTasksLinear);
+        tasks.setVisibility(View.INVISIBLE);
     }
 
     private boolean checkIfUserLoggedInFacebook(){

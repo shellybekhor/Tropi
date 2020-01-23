@@ -3,6 +3,8 @@
     <color name="colorLightGreen">#E2F6E7</color>
     <color name="colorPrimaryDark">#9CD4AD</color>
     <color name="colorPrimaryGreen">#9CD4AD</color>
+    <color name="colorSecondaryPink">#FFC89999</color>
+    <color name="colorSecondaryGreen">#D9E285</color>
     <color name="colorBackgroungButton">#efeeee</color>
     <color name="colorText">#2D2E2F</color>
     <color name="colorDefaultBackground">#F6F8F6</color>
