@@ -1,4 +1,4 @@
-package shellybekhor.tropi.Plants;
+package shellybekhor.tropi;
 
 public class Task {
 

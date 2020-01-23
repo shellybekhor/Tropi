@@ -4,14 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import shellybekhor.tropi.Plants.Plant;
 import shellybekhor.tropi.Plants.Spices;
 import shellybekhor.tropi.Plants.Succulent;
-import shellybekhor.tropi.Plants.Task;
 import shellybekhor.tropi.Plants.Tropic;
 import shellybekhor.tropi.ui.login.LoginActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;

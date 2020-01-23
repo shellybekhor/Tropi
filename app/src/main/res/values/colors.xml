@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorLightGreen">#E2F6E7</color>
-<!--    <color name="colorPrimaryDark">#00574B</color>-->
+    <color name="colorPrimaryDark">#9CD4AD</color>
     <color name="colorPrimaryGreen">#9CD4AD</color>
     <color name="colorBackgroungButton">#efeeee</color>
-    <color name="colorText">#ffffff</color>
-
-    <!--    <color name="colorAccent">#D81B60</color>-->
+    <color name="colorText">#2D2E2F</color>
     <color name="colorDefaultBackground">#F6F8F6</color>
     <color name="colorDefaultWindows">#DCDCDC</color>
 </resources>
