@@ -12,7 +12,7 @@ public class Task {
     public Task(String categoryName, int glassesPerWatering) {
         _categoryName = categoryName;
         _glassesPerWatering = glassesPerWatering;
-        _taskText = String.format("Watering %d glasses", _glassesPerWatering);
+        _taskText = String.format("Watering with %d glasses", _glassesPerWatering);
     }
 
 }

@@ -12,7 +12,6 @@ public class Spices extends Plant {
     public Spices(String houseLocation, String kind, String nickname) {
         super(CATEGORY, WATER_EVERY_X_DAYS, GLASSES_PER_WATERING, houseLocation, kind, nickname);
         lastWatering = Calendar.getInstance();
-
     }
 
     public static Calendar getLastWatering() {

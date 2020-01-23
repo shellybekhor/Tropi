@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Random;
 
 
@@ -43,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     String currentUserId;
     boolean tipOpen = false;
+    /**
+     * This hash map holds the different categories and an int representing
+     * if they have a relevant task open (=1) or not(=0).
+     */
+    public static HashMap<String, Integer> currentTasks = new HashMap<String, Integer> ();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+        currentTasks.put("Succulent", 0);
+        currentTasks.put("Tropic", 0);
+        currentTasks.put("Spice", 0);
         connectUser();
         getPlantsDatabase();
     }
@@ -81,14 +91,12 @@ public class MainActivity extends AppCompatActivity {
                         if (dataSnapshot.hasChild(cat)){
                             noPlants = false;
                             setTask(cat);
-//                            System.out.println("hi");
                         }
                     }
                     if (noPlants){
                         setEmptyCheckList();
                     }
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     System.out.println("The read failed: " + databaseError.getCode());
@@ -98,38 +106,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTask(String categoryName) {
-        int id;
+
+        if (currentTasks.get(categoryName) == 1) { return; }
         int glassesOfWater;
         int daysBetweenWatering;
         Calendar lastWateingDate;
         switch (categoryName)
         {
             case "Succulent":
-//                id = 0;
                 glassesOfWater = Succulent.GLASSES_PER_WATERING;
                 daysBetweenWatering = Succulent.WATER_EVERY_X_DAYS;
                 lastWateingDate = Succulent.getLastWatering();
                 break;
             case "Tropic":
-//                id = 1;
                 glassesOfWater = Tropic.GLASSES_PER_WATERING;
                 daysBetweenWatering = Tropic.WATER_EVERY_X_DAYS;
                 lastWateingDate = Tropic.getLastWatering();
                 break;
             case "Spice":
-//                id = 2;
                 glassesOfWater = Spices.GLASSES_PER_WATERING;
                 daysBetweenWatering = Spices.WATER_EVERY_X_DAYS;
                 lastWateingDate = Spices.getLastWatering();
                 break;
             default:
-//                id = 0;
                 glassesOfWater = Succulent.GLASSES_PER_WATERING;
                 daysBetweenWatering = Tropic.WATER_EVERY_X_DAYS;
                 lastWateingDate = Succulent.getLastWatering();
         }
 
         // if today is the day - create task and add it
+        // todo - fix logic with dates.
+
         Calendar todayDate = Calendar.getInstance();
         if (lastWateingDate == null) {
             lastWateingDate = todayDate;
@@ -139,18 +146,36 @@ public class MainActivity extends AppCompatActivity {
         if ((daysDiff >= daysBetweenWatering) || (daysDiff == 0)) {
             Task task = new Task(categoryName, glassesOfWater);
             addTaskToScroll(task);
+            currentTasks.put(categoryName, 1);
         }
     }
 
-    private void addTaskToScroll(Task task) {
-        LinearLayout toDoList = findViewById(R.id.tasksLinear);
-        TextView text = new TextView(this);
-        text.setBackgroundResource(R.drawable.gradient_tropi);
-        text.setText(task._taskText);
-        toDoList.addView(text);
+    private void accomplishTask() {
+
     }
 
-
+    private void addTaskToScroll(Task task) {
+//        LinearLayout toDoList = findViewById(R.id.allTasksLinear);
+        boolean isChecked = false;
+        if (task._categoryName.equals(getResources().getString(R.string.Succulent))) {
+            View cb = findViewById(R.id.checkboxSucculent);
+            TextView text = findViewById(R.id.taskTextSucculent);
+            cb.setVisibility(View.VISIBLE);
+            text.setText(task._taskText);
+        }
+        else if (task._categoryName.equals(getResources().getString(R.string.Tropic))) {
+            View cb = findViewById(R.id.checkboxSucculent);
+            TextView text = findViewById(R.id.taskTextSucculent);
+            cb.setVisibility(View.VISIBLE);
+            text.setText(task._taskText);
+        }
+        else {
+            View cb = findViewById(R.id.checkboxSucculent);
+            TextView text = findViewById(R.id.taskTextSucculent);
+            cb.setVisibility(View.VISIBLE);
+            text.setText(task._taskText);
+        }
+    }
 
     private void setEmptyCheckList() {
         ScrollView toDoList = findViewById(R.id.plantsToDoList);
