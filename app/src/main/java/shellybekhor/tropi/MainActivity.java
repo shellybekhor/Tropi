@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setEmptyCheckList() {
         ScrollView toDoList = findViewById(R.id.plantsToDoList);
-        toDoList.setBackgroundResource(R.drawable.ic_nothing_to_do);
+        toDoList.setBackgroundResource(R.drawable.ic_nothing_to_do_text);
     }
 
     private boolean checkIfUserLoggedInFacebook(){
