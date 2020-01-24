@@ -36,12 +36,11 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseUser;
 
 import shellybekhor.tropi.MainActivity;
 import shellybekhor.tropi.R;
-import shellybekhor.tropi.ui.login.LoginViewModel;
-import shellybekhor.tropi.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -87,11 +86,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 loadingProgressBar.setVisibility(View.GONE);
                 if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
+                    showLoginFailed();
                 }
                 if (loginResult.getSuccess() != null) {
-//                    launchMainActivity();
-//                    updateUiWithUser(loginResult.getSuccess());
+//                    welcomeUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
 
@@ -155,6 +153,8 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            welcomeUser();
+                            setResult(Activity.RESULT_OK);
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -174,23 +174,24 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            welcomeUser();
+                            setResult(Activity.RESULT_OK);
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            showLoginFailed();
                         }
                     }
                 });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+    private void welcomeUser() {
+        Toast.makeText(getApplicationContext(), getString(R.string.welcome), Toast.LENGTH_LONG).show();
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    private void showLoginFailed() {
+        Toast.makeText(getApplicationContext(), "Failed to login", Toast.LENGTH_SHORT).show();
     }
 
     public void FacebookAuth(){
@@ -204,19 +205,22 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 AccessToken accessToken = AccessToken.getCurrentAccessToken();
                 handleFacebookAccessToken(accessToken);
-                launchMainActivity();
+                setResult(Activity.RESULT_OK);
+                finish();
             }
 
             @Override
             public void onCancel() {
                 Log.d(TAG, "facebook:onCancel");
-                // ...
+                Toast.makeText(LoginActivity.this, "facebook canceled Login",
+                        Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(FacebookException error) {
                 Log.d(TAG, "facebook:onError", error);
-                // ...
+                Toast.makeText(LoginActivity.this, "Failed to Login with facebook",
+                        Toast.LENGTH_LONG).show();
             }
         });
     }

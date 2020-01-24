@@ -41,10 +41,12 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_USER_ID = "shellybekhor.tropi.extra.USERID";
     public static final int PLANT_REQUEST = 0;
     public static final int TIP_WIDTH = 170;
+    public static final int REQUEST_CODE = 1;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     String currentUserId;
     boolean tipOpen = false;
+    boolean noPlants = true;
     /**
      * This hash map holds the different categories and an int representing
      * if they have a relevant task open (=1) or not(=0).
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void launchLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE);
     }
 
     private void getPlantsDatabase() {
@@ -89,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
             userDB.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    boolean noPlants = true;
                     for (String cat: Plant.CATEGORIES){
                         if (dataSnapshot.hasChild(cat)){
                             noPlants = false;
@@ -241,23 +242,23 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (task._categoryName.equals(getResources().getString(R.string.Tropic))) {
             toDoList.setVisibility(View.VISIBLE);
-            View cb = findViewById(R.id.checkboxSucculent);
+            View cb = findViewById(R.id.checkboxTropic);
             cb.setVisibility(View.VISIBLE);
-            TextView text = findViewById(R.id.taskTextSucculent);
+            TextView text = findViewById(R.id.taskTextTropic);
             text.setText(task._taskText);
         }
         else {
             toDoList.setVisibility(View.VISIBLE);
-            View cb = findViewById(R.id.checkboxSucculent);
+            View cb = findViewById(R.id.checkboxSpices);
             cb.setVisibility(View.VISIBLE);
-            TextView text = findViewById(R.id.taskTextSucculent);
+            TextView text = findViewById(R.id.taskTextSpices);
             text.setText(task._taskText);
         }
     }
 
     private void setEmptyCheckList() {
         ScrollView toDoList = findViewById(R.id.plantsToDoList);
-        toDoList.setBackgroundResource(R.drawable.ic_nothing_to_do_text);
+        toDoList.setBackgroundResource(R.drawable.free_day_background);
         View tasks = findViewById(R.id.allTasksLinear);
         tasks.setVisibility(View.INVISIBLE);
     }
@@ -277,7 +278,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToMyPlants(View view) {
-        Intent intent = new Intent(this, MyPlantsActivity.class);
+        Intent intent;
+        if (noPlants){
+            intent = new Intent(this, NoPlantsActivity.class);
+        }
+        else {
+            intent = new Intent(this, MyPlantsActivity.class);
+        }
         intent.putExtra(EXTRA_USER_ID, currentUserId);
         startActivity(intent);
     }

@@ -71,6 +71,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="@string/Tropic"
+                    android:buttonTint="@color/colorPrimaryGreen"
+                    android:textSize="22dp"
                     android:textColor="@color/colorText"
                     android:textStyle="bold"
                     android:visibility="invisible" />
@@ -98,6 +100,8 @@
                     android:layout_gravity="start"
                     android:text="@string/Spice"
                     android:textColor="@color/colorText"
+                    android:buttonTint="@color/colorPrimaryGreen"
+                    android:textSize="22dp"
                     android:textStyle="bold"
                     android:visibility="invisible" />
 

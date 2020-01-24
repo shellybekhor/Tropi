@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +31,8 @@ import java.util.ArrayList;
 public class MyPlantsActivity extends AppCompatActivity {
 
     String currentUserId;
+    int newPlant = -1;
+    public static final String EXTRA_NP = "shellybekhor.tropi.extra.NEW_PLANT";
     private final int[] shelvesIDs = {R.id.SocculentShelf, R.id.tropicShelf, R.id.spiceShelf};
     private ArrayList<Integer> succulentIcons = new ArrayList<>();
     private ArrayList<Integer> tropicIcons = new ArrayList<>();
@@ -43,20 +46,33 @@ public class MyPlantsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         currentUserId = intent.getStringExtra(MainActivity.EXTRA_USER_ID);
+        newPlant = intent.getIntExtra(EXTRA_NP, -1);
         readIconsFromDB();
     }
 
     private void addIcons(int shelfId, ArrayList<Integer> icons){
-        LinearLayout shelf = findViewById(shelfId);
+        LinearLayout shelf = findViewById(shelvesIDs[shelfId]);
+        int newIcon = 0;
+        if (newPlant == shelfId){
+            newIcon = icons.remove(icons.size()-1);
+        }
         for (int icon: icons) {
-            shelf.addView(createImageView(icon));
+            shelf.addView(createImageView(icon, false));
+        }
+        if (newPlant == shelfId){
+            shelf.addView(createImageView(newIcon, true));
         }
     }
 
-    private ImageView createImageView(int resource){
-        ImageView imageView = new ImageView(this);
-        imageView.setBackgroundResource(resource);
-        return imageView;
+    private View createImageView(int resource, boolean isNew){
+        View view = new View(this);
+        if (isNew) {
+            TextView text = new TextView(this);
+            text.setText("new!\n\n\n\n\n\n");
+            view = text;
+        }
+        view.setBackgroundResource(resource);
+        return view;
     }
 
     private void readIconsFromDB(){
@@ -64,18 +80,13 @@ public class MyPlantsActivity extends AppCompatActivity {
         userDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                boolean noPlants = true;
                 for (int i = 0; i < Plant.CATEGORIES.length; i++){
                     if (dataSnapshot.hasChild(Plant.CATEGORIES[i])){
-                        noPlants = false;
                         for (DataSnapshot ds: dataSnapshot.child(Plant.CATEGORIES[i]).getChildren()){
                             totalIcons[i].add(ds.getValue(Integer.class));
                         }
-                        addIcons(shelvesIDs[i], totalIcons[i]);
+                        addIcons(i, totalIcons[i]);
                     }
-                }
-                if(noPlants){
-                    setNoPlants();
                 }
             }
 
@@ -91,24 +102,19 @@ public class MyPlantsActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
-    public void addNewPlantButtonClicking(View view) {
-        Intent intent = new Intent(this, ChooseCategoryActivity.class);
-        intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
-        startActivityForResult(intent, MainActivity.PLANT_REQUEST);
-    }
-
-    private void setNoPlants(){
-        Button addNewPlant = findViewById(R.id.addPlantButton2);
-        addNewPlant.setVisibility(View.VISIBLE);
-        View s1 = findViewById(R.id.shelf1);
-        s1.setVisibility(View.INVISIBLE);
-        View s2 = findViewById(R.id.shelf2);
-        s2.setVisibility(View.INVISIBLE);
-        View s3 = findViewById(R.id.shelf3);
-        s3.setVisibility(View.INVISIBLE);
-
-        //TODO: set backgrounds and text "all of this can be yours"
-    }
+//    private void setNoPlants(){
+//        Button addNewPlant = findViewById(R.id.addPlantButton2);
+//        addNewPlant.setVisibility(View.VISIBLE);
+//        final int[] makeInvisible = {R.id.shelf1, R.id.shelf2, R.id.shelf3,
+//                R.id.info_succulent, R.id.info_tropical, R.id.info_spices};
+//        for(int id: makeInvisible){
+//            View v = findViewById(id);
+//            v.setVisibility(View.INVISIBLE);
+//        }
+//        RelativeLayout relativeLayout = new RelativeLayout(this);
+//        relativeLayout.setBackgroundResource(R.drawable.ic_background_np_mp);
+//        setContentView(relativeLayout);
+//    }
 
     public void infoPopUp(View view){
         // inflate the layout of the popup window
