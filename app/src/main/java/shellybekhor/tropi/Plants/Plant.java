@@ -1,8 +1,7 @@
 package shellybekhor.tropi.Plants;
 
 import java.io.Serializable;
-
-import shellybekhor.tropi.R;
+import java.util.Calendar;
 
 /**
  * This class is the plant abstract class.
@@ -11,75 +10,55 @@ import shellybekhor.tropi.R;
 @SuppressWarnings("serial")
 public class Plant implements Serializable {
 
-    public int _category;
-    public float _wateringPerWeek;
-    public float _litersPerWatering;
-    public String _houseLocation;
-    public String _kind;
-    public String _nickname;
+    private int category;
+    private int daysBetweenWatering;
+    private int glassesPerWatering;
+    private Calendar lastWatering;
     public static final String[] CATEGORIES = {"Succulent", "Tropic", "Spice"};
 
 
     public Plant(){
-
+        lastWatering = Calendar.getInstance();
     }
 
-    public int get_category() {
-        return _category;
-    }
-
-    public void set_category(int _category) {
-        this._category = _category;
-    }
-
-    public float get_wateringPerWeek() {
-        return _wateringPerWeek;
-    }
-
-    public void set_wateringPerWeek(float _wateringPerWeek) {
-        this._wateringPerWeek = _wateringPerWeek;
-    }
-
-    public float get_litersPerWatering() {
-        return _litersPerWatering;
-    }
-
-    public void set_litersPerWatering(float _litersPerWatering) {
-        this._litersPerWatering = _litersPerWatering;
-    }
-
-    public String get_houseLocation() {
-        return _houseLocation;
-    }
-
-    public void set_houseLocation(String _houseLocation) {
-        this._houseLocation = _houseLocation;
-    }
-
-    public String get_kind() {
-        return _kind;
-    }
-
-    public void set_kind(String _kind) {
-        this._kind = _kind;
-    }
-
-    public String get_nickname() {
-        return _nickname;
-    }
-
-    public void set_nickname(String _nickname) {
-        this._nickname = _nickname;
-    }
-
-    public Plant(int category, float wateringPerWeek, float litersPerWatering, String houseLocation,
-                 String kind, String nickname)
+    public Plant(int category, int wateringPerWeek, int litersPerWatering)
     {
-        _category = category;
-        _wateringPerWeek = wateringPerWeek;
-        _litersPerWatering = litersPerWatering;
-        _houseLocation = houseLocation;
-        _kind = kind;
-        _nickname = nickname;
+        this.category = category;
+        daysBetweenWatering = wateringPerWeek;
+        glassesPerWatering = litersPerWatering;
+        lastWatering = Calendar.getInstance();
     }
+
+    public Calendar getLastWatering() {
+        return lastWatering;
+    }
+
+    public void setLastWatering(Calendar lastWatering) {
+        this.lastWatering = lastWatering;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public int getDaysBetweenWatering() {
+        return daysBetweenWatering;
+    }
+
+    public void setDaysBetweenWatering(int _wateringPerWeek) {
+        this.daysBetweenWatering = _wateringPerWeek;
+    }
+
+    public int getGlassesPerWatering() {
+        return glassesPerWatering;
+    }
+
+    public void setGlassesPerWatering(int glassesPerWatering) {
+        this.glassesPerWatering = glassesPerWatering;
+    }
+
 }

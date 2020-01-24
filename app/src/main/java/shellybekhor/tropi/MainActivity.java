@@ -185,51 +185,45 @@ public class MainActivity extends AppCompatActivity {
                 (spicesCheckBox.getVisibility() == View.INVISIBLE));
     }
 
+    private Plant getCategorizedPlant(String categoryName) {
+        Plant categorizedPlant = null;
+        switch (categoryName)
+        {
+            case "Succulent":
+                categorizedPlant = new Succulent();
+                break;
+            case "Tropic":
+                categorizedPlant = new Tropic();
+                break;
+            case "Spice":
+               categorizedPlant = new Spices();
+                break;
+
+        }
+        return categorizedPlant;
+    }
 
     private void setTask(String categoryName) {
 
         if (currentTasks.get(categoryName) == 1) { return; }
-        int glassesOfWater;
-        int daysBetweenWatering;
-        Calendar lastWateingDate;
-        switch (categoryName)
-        {
-            case "Succulent":
-                glassesOfWater = Succulent.GLASSES_PER_WATERING;
-                daysBetweenWatering = Succulent.WATER_EVERY_X_DAYS;
-                lastWateingDate = Succulent.getLastWatering();
-                break;
-            case "Tropic":
-                glassesOfWater = Tropic.GLASSES_PER_WATERING;
-                daysBetweenWatering = Tropic.WATER_EVERY_X_DAYS;
-                lastWateingDate = Tropic.getLastWatering();
-                break;
-            case "Spice":
-                glassesOfWater = Spices.GLASSES_PER_WATERING;
-                daysBetweenWatering = Spices.WATER_EVERY_X_DAYS;
-                lastWateingDate = Spices.getLastWatering();
-                break;
-            default:
-                glassesOfWater = Succulent.GLASSES_PER_WATERING;
-                daysBetweenWatering = Tropic.WATER_EVERY_X_DAYS;
-                lastWateingDate = Succulent.getLastWatering();
-        }
+        Plant categorizedPlant = getCategorizedPlant(categoryName);
 
         // if today is the day - create task and add it
         // todo - fix logic with dates.
         Calendar todayDate = Calendar.getInstance();
-        if (lastWateingDate == null) {
-            lastWateingDate = todayDate;
+        if (categorizedPlant.getLastWatering() == null) {
+            categorizedPlant.setLastWatering(todayDate);
         }
-        long diff = todayDate.getTimeInMillis() - lastWateingDate.getTimeInMillis();
+
+        long diff = todayDate.getTimeInMillis() - categorizedPlant.getLastWatering().getTimeInMillis();
         float daysDiff = (float) diff / (24 * 60 * 60 * 1000);
-        if ((daysDiff >= daysBetweenWatering) || (daysDiff == 0)) {
-            Task task = new Task(categoryName, glassesOfWater);
+        if ((daysDiff >= categorizedPlant.getDaysBetweenWatering()) || (daysDiff == 0)) { // todo
+            Task task = new Task(categoryName, categorizedPlant.getGlassesPerWatering());
             addTaskToScroll(task);
+            categorizedPlant.setLastWatering(Calendar.getInstance());
             currentTasks.put(categoryName, 1);
         }
     }
-
 
     private void addTaskToScroll(Task task) {
         LinearLayout toDoList = findViewById(R.id.allTasksLinear);
@@ -258,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setEmptyCheckList() {
         ScrollView toDoList = findViewById(R.id.plantsToDoList);
-        toDoList.setBackgroundResource(R.drawable.free_day_background);
+        toDoList.setBackgroundResource(R.drawable.ic_nothing_to_do_text); // todo- add free day
         View tasks = findViewById(R.id.allTasksLinear);
         tasks.setVisibility(View.INVISIBLE);
     }

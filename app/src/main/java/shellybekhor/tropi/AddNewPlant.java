@@ -35,27 +35,24 @@ public class AddNewPlant extends AppCompatActivity {
     }
 
     public void plantDone(View view){
-        EditText locationTextView = findViewById(R.id.locationText);
-        String location = locationTextView.getText().toString();
-        EditText nicknameTextView = findViewById(R.id.nicknameText);
-        String nickname = nicknameTextView .getText().toString();
-        EditText kindTextView = findViewById(R.id.kindText);
-        String kind = kindTextView.getText().toString();
+//        EditText locationTextView = findViewById(R.id.locationText);
+//        String location = locationTextView.getText().toString();
+//        EditText nicknameTextView = findViewById(R.id.nicknameText);
+//        String nickname = nicknameTextView .getText().toString();
+//        EditText kindTextView = findViewById(R.id.kindText);
+//        String kind = kindTextView.getText().toString();
 
         Plant newPlant;
         switch (currentCategory){
             case Succulent.CATEGORY:
-                newPlant = new Succulent(location, kind, nickname);
+                newPlant = new Succulent();
                 break;
             case Tropic.CATEGORY:
-                newPlant = new Tropic(location, kind, nickname);
+                newPlant = new Tropic();
                 break;
             case Spices.CATEGORY:
-                newPlant = new Spices(location, kind, nickname);
+                newPlant = new Spices();
                 break;
-//            case Special.CATEGORY:
-//                newPlant = new Special(location, kind, nickname);
-//                break;
             default:
                 newPlant = null;
         }
