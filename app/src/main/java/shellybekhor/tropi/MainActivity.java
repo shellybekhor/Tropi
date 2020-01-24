@@ -39,6 +39,10 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_USER_ID = "shellybekhor.tropi.extra.USERID";
+    public static final String SUCCULENT = "Succulent";
+    public static final String TROPIC = "Tropic";
+    public static final String SPICES = "Spice";
+    public static final String WELL_DONE = "Well done!";
     public static final int PLANT_REQUEST = 0;
     public static final int TIP_WIDTH = 170;
     public static final int REQUEST_CODE = 1;
@@ -47,6 +51,25 @@ public class MainActivity extends AppCompatActivity {
     String currentUserId;
     boolean tipOpen = false;
     boolean noPlants = true;
+
+
+    // TROPY TIPS //
+    public static final String TIP_1 = "You can water with a sprinkler!";
+    public static final String TIP_2 = "Clean your plants from dust, " +
+                                        "it makes them happier";
+    public static final String TIP_3 = "Don't forget to cut the dead leaves";
+    public static final String TIP_4 = "Take the plants to the sun for a few minutes, they love it";
+    public static final String TIP_5 = "You can change some twigs with your friends";
+    public static final String TIP_6 = "Use distilled water for once in a while";
+    public static final String TIP_7 = "Take your tropic plants with you to the shower, " +
+                                        "they love the steams";
+    public static final String TIP_8 = "Use big pots for your plants";
+    public static final String TIP_9 = "If your plants only grow upwards and not to the sides " +
+                                        "they need more sun!";
+    public static final String TIP_10 = "If you see pests on the plant, take them off and spray" +
+                                        "with water and soap";
+
+
     /**
      * This hash map holds the different categories and an int representing
      * if they have a relevant task open (=1) or not(=0).
@@ -61,12 +84,29 @@ public class MainActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-        currentTasks.put("Succulent", 0);
-        currentTasks.put("Tropic", 0);
-        currentTasks.put("Spice", 0);
+        currentTasks.put(SUCCULENT, 0);
+        currentTasks.put(TROPIC, 0);
+        currentTasks.put(SPICES, 0);
+        initWateredToday();
         connectUser();
         getPlantsDatabase();
         addListenerOnTasks();
+    }
+
+    private void initWateredToday() {
+        Succulent succulent = new Succulent();
+        updatePlantWateredToday(succulent);
+        Tropic tropic = new Tropic();
+        updatePlantWateredToday(tropic);
+        Spices spices = new Spices();
+        updatePlantWateredToday(spices);
+    }
+
+    private void updatePlantWateredToday(Plant plant) {
+        if (plant.isWateredToday() &&
+                plant.getLastWatering() != Calendar.getInstance()) {
+            plant.setWateredToday(false);
+        }
     }
 
 
@@ -123,10 +163,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     Toast.makeText(MainActivity.this,
-                            "Well done!", Toast.LENGTH_LONG).show();
+                            WELL_DONE, Toast.LENGTH_LONG).show();
                      v.setVisibility(View.INVISIBLE);
                     final TextView text = findViewById(R.id.taskTextSucculent);
                     text.setVisibility(View.INVISIBLE);
+                    Succulent succulent = new Succulent();
+                    succulent.setWateredToday(true);
+                    currentTasks.put(SUCCULENT, 0);
                     if (isEmptyCheckList()) {
                         setEmptyCheckList();
                     }
@@ -143,10 +186,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     Toast.makeText(MainActivity.this,
-                            "Well done!", Toast.LENGTH_LONG).show();
+                            WELL_DONE, Toast.LENGTH_LONG).show();
                     v.setVisibility(View.INVISIBLE);
                     final TextView text = findViewById(R.id.taskTextTropic);
                     text.setVisibility(View.INVISIBLE);
+                    Tropic tropic = new Tropic();
+                    tropic.setWateredToday(true);
+                    currentTasks.put(TROPIC, 0);
                     if (isEmptyCheckList()) {
                         setEmptyCheckList();
                     }
@@ -163,10 +209,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     Toast.makeText(MainActivity.this,
-                            "Well done!", Toast.LENGTH_LONG).show();
+                            WELL_DONE, Toast.LENGTH_LONG).show();
                     v.setVisibility(View.INVISIBLE);
                     final TextView text = findViewById(R.id.taskTextSpices);
                     text.setVisibility(View.INVISIBLE);
+                    Spices spice = new Spices();
+                    spice.setWateredToday(true);
+                    currentTasks.put(SPICES, 0);
                     if (isEmptyCheckList()) {
                         setEmptyCheckList();
                     }
@@ -189,38 +238,40 @@ public class MainActivity extends AppCompatActivity {
         Plant categorizedPlant = null;
         switch (categoryName)
         {
-            case "Succulent":
+            case SUCCULENT:
                 categorizedPlant = new Succulent();
                 break;
-            case "Tropic":
+            case TROPIC:
                 categorizedPlant = new Tropic();
                 break;
-            case "Spice":
+            case SPICES:
                categorizedPlant = new Spices();
                 break;
-
         }
         return categorizedPlant;
     }
 
     private void setTask(String categoryName) {
 
+        // if there's already a task  in this category do nothing
         if (currentTasks.get(categoryName) == 1) { return; }
-        Plant categorizedPlant = getCategorizedPlant(categoryName);
 
         // if today is the day - create task and add it
-        // todo - fix logic with dates.
+        Plant plant = getCategorizedPlant(categoryName);
         Calendar todayDate = Calendar.getInstance();
-        if (categorizedPlant.getLastWatering() == null) {
-            categorizedPlant.setLastWatering(todayDate);
+        if (plant.getLastWatering() == null) {
+            plant.setLastWatering(todayDate);
         }
 
-        long diff = todayDate.getTimeInMillis() - categorizedPlant.getLastWatering().getTimeInMillis();
+        // check date
+        long diff = todayDate.getTimeInMillis() -
+                plant.getLastWatering().getTimeInMillis();
         float daysDiff = (float) diff / (24 * 60 * 60 * 1000);
-        if ((daysDiff >= categorizedPlant.getDaysBetweenWatering()) || (daysDiff == 0)) { // todo
-            Task task = new Task(categoryName, categorizedPlant.getGlassesPerWatering());
+        if (((daysDiff >= plant.getDaysBetweenWatering()) || (daysDiff == 0)) // todo remove 2nd part
+                && (!plant.isWateredToday())) {
+            Task task = new Task(categoryName, plant.getGlassesPerWatering());
             addTaskToScroll(task);
-            categorizedPlant.setLastWatering(Calendar.getInstance());
+            plant.setLastWatering(Calendar.getInstance());
             currentTasks.put(categoryName, 1);
         }
     }
@@ -273,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToMyPlants(View view) {
         Intent intent;
-        if (noPlants){
+        if (noPlants) {
             intent = new Intent(this, NoPlantsActivity.class);
         }
         else {
@@ -302,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
             text.setText(R.string.tip_title);
             tipOpen = false;
         }
-        else{
+        else {
             params.width += TIP_WIDTH;
             text.setText(randomTip());
             tipOpen = true;
@@ -312,12 +363,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String randomTip(){
         Random r = new Random();
-        String[] tips = {"You can water with a sprinkler!",
-            "Sometimes clean your plants from dust, it makes them happier",
-            "Don't forget to cut the dead leaves",
-            "Take your plants to the sun for a few minutes sometimes",
-            "You can change some twigs with your friends",
-            "You can water with distilled water sometimes"};
+        String[] tips = {TIP_1, TIP_2, TIP_3, TIP_4, TIP_5, TIP_6, TIP_7, TIP_8, TIP_9, TIP_10};
         int i = r.nextInt(tips.length);
         return tips[i];
     }

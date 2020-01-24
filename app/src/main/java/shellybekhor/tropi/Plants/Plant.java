@@ -10,23 +10,27 @@ import java.util.Calendar;
 @SuppressWarnings("serial")
 public class Plant implements Serializable {
 
+    public static final String[] CATEGORIES = {"Succulent", "Tropic", "Spice"};
     private int category;
     private int daysBetweenWatering;
     private int glassesPerWatering;
     private Calendar lastWatering;
-    public static final String[] CATEGORIES = {"Succulent", "Tropic", "Spice"};
+    private Calendar birthDate;
+    private boolean wateredToday;
 
 
-    public Plant(){
-        lastWatering = Calendar.getInstance();
-    }
+//    public Plant(){
+//        lastWatering = Calendar.getInstance();
+//    }
 
     public Plant(int category, int wateringPerWeek, int litersPerWatering)
     {
         this.category = category;
         daysBetweenWatering = wateringPerWeek;
         glassesPerWatering = litersPerWatering;
-        lastWatering = Calendar.getInstance();
+        birthDate = Calendar.getInstance();
+        lastWatering = null;
+        wateredToday = false;
     }
 
     public Calendar getLastWatering() {
@@ -61,4 +65,19 @@ public class Plant implements Serializable {
         this.glassesPerWatering = glassesPerWatering;
     }
 
+    public boolean isWateredToday() {
+        return wateredToday;
+    }
+
+    public void setWateredToday(boolean wateredToday) {
+        this.wateredToday = wateredToday;
+    }
+
+    public Calendar getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Calendar birthDate) {
+        this.birthDate = birthDate;
+    }
 }
