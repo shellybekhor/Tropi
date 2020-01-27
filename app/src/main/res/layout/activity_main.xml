@@ -7,6 +7,24 @@
     android:background="@color/colorDefaultBackground"
     tools:context=".MainActivity">
 
+    <!--    <Button-->
+<!--        android:id="@+id/goToMyPlantsButton"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:layout_marginBottom="24dp"-->
+<!--        android:background="@drawable/rounded_gray_button"-->
+<!--        android:fontFamily="@font/seoge_light"-->
+<!--        android:onClick="goToMyPlants"-->
+<!--        android:paddingStart="30dp"-->
+<!--        android:text="my plants"-->
+<!--        android:textAlignment="textStart"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textSize="25sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/addPlantButton"-->
+<!--        app:layout_constraintHorizontal_bias="0.71"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
     <ScrollView
         android:id="@+id/plantsToDoList"
         android:layout_width="290dp"
@@ -19,7 +37,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.606">
+        app:layout_constraintVertical_bias="0.67">
 
         <LinearLayout
             android:id="@+id/allTasksLinear"
@@ -116,23 +134,18 @@
         </LinearLayout>
     </ScrollView>
 
-    <!--    <Button-->
-<!--        android:id="@+id/goToMyPlantsButton"-->
-<!--        android:layout_width="150dp"-->
-<!--        android:layout_height="64dp"-->
-<!--        android:layout_marginBottom="24dp"-->
-<!--        android:background="@drawable/rounded_gray_button"-->
-<!--        android:fontFamily="@font/seoge_light"-->
-<!--        android:onClick="goToMyPlants"-->
-<!--        android:paddingStart="30dp"-->
-<!--        android:text="my plants"-->
-<!--        android:textAlignment="textStart"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textSize="25sp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/addPlantButton"-->
-<!--        app:layout_constraintHorizontal_bias="0.71"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/coming_caring"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/plantsToDoList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/addPlantButton"
@@ -157,8 +170,8 @@
 
     <Button
         android:id="@+id/tipButton"
-        android:layout_width="50dp"
-        android:layout_height="100dp"
+        android:layout_width="70dp"
+        android:layout_height="140dp"
         android:background="@drawable/gradient_tropi"
         android:fontFamily="@font/seoge_light"
         android:onClick="openTropiTip"
@@ -166,7 +179,7 @@
         android:paddingEnd="10dp"
         android:text="@string/tip_title"
         android:textColor="#2D2E2F"
-        android:textSize="13dp"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -178,30 +191,17 @@
         android:id="@+id/imageView"
         android:layout_width="460dp"
         android:layout_height="200dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/ic_plants_home"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.326"
+        app:layout_constraintHorizontal_bias="0.265"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/coming_caring"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/plantsToDoList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
     <Button
         android:id="@+id/logOut"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="352dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/ic_log_out"
@@ -217,9 +217,9 @@
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintHorizontal_bias="0.969"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.208" />
+        app:layout_constraintVertical_bias="0.244" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
