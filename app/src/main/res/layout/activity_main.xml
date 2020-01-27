@@ -9,8 +9,8 @@
 
     <ScrollView
         android:id="@+id/plantsToDoList"
-        android:layout_width="244dp"
-        android:layout_height="329dp"
+        android:layout_width="290dp"
+        android:layout_height="330dp"
         android:layout_marginStart="28dp"
         android:background="@drawable/rounded_gray_button"
 
@@ -27,8 +27,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="20dp"
-            android:visibility="invisible"
-            android:paddingBottom="20dp">
+            android:paddingBottom="20dp"
+            android:visibility="invisible">
 
             <LinearLayout
                 android:id="@+id/SucculentLinear"
@@ -71,10 +71,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:buttonTint="@color/colorPrimaryGreen"
-                    android:textSize="22dp"
-                    android:textStyle="bold"
                     android:text="@string/Tropic"
                     android:textColor="@color/colorText"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
                     android:visibility="invisible" />
 
                 <TextView
@@ -99,10 +99,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:buttonTint="@color/colorPrimaryGreen"
-                    android:textSize="22dp"
-                    android:textStyle="bold"
                     android:text="@string/Spice"
                     android:textColor="@color/colorText"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
                     android:visibility="invisible" />
 
                 <TextView
@@ -155,7 +155,7 @@
     <Button
         android:id="@+id/tipButton"
         android:layout_width="77dp"
-        android:layout_height="317dp"
+        android:layout_height="320dp"
         android:background="@drawable/gradient_tropi"
         android:fontFamily="@font/seoge_light"
         android:onClick="openTropiTip"
@@ -163,13 +163,13 @@
         android:paddingEnd="10dp"
         android:text="@string/tip_title"
         android:textColor="#2D2E2F"
-        android:textSize="24dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.589" />
+        app:layout_constraintVertical_bias="0.615" />
 
     <ImageView
         android:id="@+id/imageView"
