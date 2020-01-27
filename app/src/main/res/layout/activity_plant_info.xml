@@ -73,7 +73,7 @@
         android:id="@+id/imageView"
         android:layout_width="480dp"
         android:layout_height="120dp"
-        android:background="@drawable/ic_lower_set"
+        android:background="@drawable/ic_plants_bar_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
