@@ -83,6 +83,7 @@ public class MyPlantsActivity extends AppCompatActivity {
                 for (int i = 0; i < Plant.CATEGORIES.length; i++){
                     if (dataSnapshot.hasChild(Plant.CATEGORIES[i])){
                         for (DataSnapshot ds: dataSnapshot.child(Plant.CATEGORIES[i]).getChildren()){
+                            if (ds.getKey().equals(MainActivity.TIMESTAMP)) continue;
                             totalIcons[i].add(ds.getValue(Integer.class));
                         }
                         addIcons(i, totalIcons[i]);

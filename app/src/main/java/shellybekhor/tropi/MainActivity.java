@@ -26,6 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int PLANT_REQUEST = 0;
     public static final int TIP_WIDTH = 170;
     public static final int REQUEST_CODE = 1;
+    public static final String TIMESTAMP = "timestamp";
+    public static final String DATE_PATTERN = "dd-MM-yyyy";
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     String currentUserId;
@@ -129,10 +134,20 @@ public class MainActivity extends AppCompatActivity {
                     for (String cat: Plant.CATEGORIES){
                         if (dataSnapshot.hasChild(cat)){
                             noPlants = false;
-                            setTask(cat);
+                            Calendar categoryLastTS;
+                            if (!dataSnapshot.child(cat).hasChild(TIMESTAMP)){
+                                Calendar clearCal = Calendar.getInstance();
+                                clearCal.clear();
+                                categoryLastTS = updateDateInDB(cat, clearCal);
+                            }
+                            else{
+                                String dateStr = dataSnapshot.child(cat).child(TIMESTAMP).getValue(String.class);
+                                categoryLastTS = readDateFromDB(dateStr);
+                            }
+                            setTask(cat, categoryLastTS);
                         }
                     }
-                    if (noPlants){
+                    if (noPlants || isEmptyCheckList()){
                         setEmptyCheckList();
                     }
                 }
@@ -142,6 +157,21 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private Calendar readDateFromDB(String dateStr) {
+        Calendar categoryLastTS;
+        Date date;
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
+        try {
+            date = sdf.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+        categoryLastTS = Calendar.getInstance();
+        categoryLastTS.setTime(date);
+        return categoryLastTS;
     }
 
     private Plant getCategorizedPlant(String categoryName) {
@@ -168,6 +198,16 @@ public class MainActivity extends AppCompatActivity {
         spicesCategoryListener(R.id.checkboxSpices);
     }
 
+    private Calendar updateDateInDB(String categoryName, Calendar date){
+        if (date == null){
+            date = Calendar.getInstance();
+        }
+        SimpleDateFormat format1 = new SimpleDateFormat(DATE_PATTERN);
+        DatabaseReference ts = mDatabase.child(currentUserId).child(categoryName).child(TIMESTAMP).getRef();
+        ts.setValue(format1.format(date.getTime()));
+        return date;
+    }
+
     private void succulentCategoryListener(int checkBoxId) {
         final CheckBox checkBox = findViewById(checkBoxId);
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -180,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                      v.setVisibility(View.INVISIBLE);
                     final TextView text = findViewById(R.id.taskTextSucculent);
                     text.setVisibility(View.INVISIBLE);
-                    Succulent.isWateredToday = true;
+                    updateDateInDB(Plant.CATEGORIES[0], null);
                     currentTasks.put(SUCCULENT, 0);
                     if (isEmptyCheckList()) {
                         setEmptyCheckList();
@@ -202,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                     v.setVisibility(View.INVISIBLE);
                     final TextView text = findViewById(R.id.taskTextTropic);
                     text.setVisibility(View.INVISIBLE);
-                    Tropic.isWateredToday = true;
+                    updateDateInDB(Plant.CATEGORIES[1], null);
                     currentTasks.put(TROPIC, 0);
                     if (isEmptyCheckList()) {
                         setEmptyCheckList();
@@ -224,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
                     v.setVisibility(View.INVISIBLE);
                     final TextView text = findViewById(R.id.taskTextSpices);
                     text.setVisibility(View.INVISIBLE);
-                    Spices.isWateredToday = true;
+                    updateDateInDB(Plant.CATEGORIES[2], null);
                     currentTasks.put(SPICES, 0);
                     if (isEmptyCheckList()) {
                         setEmptyCheckList();
@@ -244,23 +284,17 @@ public class MainActivity extends AppCompatActivity {
                 (spicesCheckBox.getVisibility() == View.INVISIBLE));
     }
 
-    private void setTask(String categoryName) {
-
+    private void setTask(String categoryName, Calendar categoryTS) {
         // if there's already a task  in this category do nothing
         Plant plant = getCategorizedPlant(categoryName);
         if (currentTasks.get(categoryName) == 1 || plant.isWateredToday()) { return; }
 
-        // if today is the day - create task and add it
-        Calendar todayDate = Calendar.getInstance();
-        if (plant.getLastWatering() == null) { // todo handle it better
-            plant.setLastWatering(todayDate);
-        }
-
         // check date
+        Calendar todayDate = Calendar.getInstance();
         long diff = todayDate.getTimeInMillis() -
-                plant.getLastWatering().getTimeInMillis();
+                categoryTS.getTimeInMillis();
         float daysDiff = (float) diff / (24 * 60 * 60 * 1000);
-        if (((daysDiff >= plant.getDaysBetweenWatering()) || (daysDiff == 0))) { // todo remove 2nd part
+        if (((daysDiff >= plant.getDaysBetweenWatering()))) {
             Task task = new Task(categoryName, plant.getGlassesPerWatering());
             addTaskToScroll(task);
             plant.setLastWatering(Calendar.getInstance());
