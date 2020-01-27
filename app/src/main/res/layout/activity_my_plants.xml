@@ -127,7 +127,6 @@
         android:layout_height="140dp"
         android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.66"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
 
@@ -135,7 +134,7 @@
             android:id="@+id/tropicShelf"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"  />
+            android:orientation="horizontal" />
     </HorizontalScrollView>
 
     <ImageView
@@ -156,16 +155,16 @@
         android:layout_marginTop="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.649"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2"
-        app:layout_constraintVertical_bias="0.265">
+        app:layout_constraintVertical_bias="0.047">
 
         <LinearLayout
             android:id="@+id/spiceShelf"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"  />
+            android:orientation="horizontal" />
     </HorizontalScrollView>
 
     <ImageView

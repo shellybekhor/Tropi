@@ -57,12 +57,12 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
             case Tropic.CATEGORY:
                 text.setText(R.string.Tropic);
                 currentCatName = getResources().getString(R.string.Tropic);
-                defineIcons(spicesIcons);
+                defineIcons(tropicalsIcons);
                 break;
             case Spices.CATEGORY:
                 text.setText(R.string.Spice);
                 currentCatName = getResources().getString(R.string.Spice);
-                defineIcons(tropicalsIcons);
+                defineIcons(spicesIcons);
                 break;
         }
     }
