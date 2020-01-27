@@ -2,14 +2,14 @@
     <string name="app_name">Tropi</string>
 
     <string name="Succulent">Succulent</string>
-    <string name="SucculentInfo">Succulent are desert plants, loves very little water.
-        Multiply watering can make them rotting in their roots. On the other hand,
-        lots of sun will make them happy and bring interesting colors! </string>
+    <string name="SucculentInfo">Succulent usually live in the desert,
+        so they love(!!) the sun and don\'t like it wet.. water sparely and keep them in direct light for colorful joy
+    </string>
 
     <string name="Tropic">Tropic</string>
-    <string name="TropicInfo">Tropic plants usually grows in jungles, under the shades of
-         big trees, hence they will love a light room but not under direct sun. They like
-        water but wont suffer from over watering. </string>
+    <string name="TropicInfo">Tropic plants usually live in jungles, under the shades of
+         big trees, hence they will love a light room but direct sun can be a bit too much.
+        keep the soil evenly moist to make them happy  </string>
 
     <string name="Spice">Spice</string>
     <string name="SpiceInfo">Spices are super fun and tasty. They love lots of water and sun. </string>
@@ -17,7 +17,7 @@
     <string name="yesButton">YES</string>
     <string name="noButton">NO</string>
 
-    <string name="categoryQuestion1">Are the leaves flashy?</string>
+    <string name="categoryQuestion1">Are the leaves fleshy?</string>
     <string name="categoryQuestion2">Are the leaves decorated?</string>
     <string name="categoryQuestion3">Did you ever eat it or it has a strong smell?</string>
 
@@ -34,6 +34,6 @@
     <string name="fb_login_protocol_scheme">fb2470114149766257</string>
     <string name="tropi_tip">check if your plants are dry every 2 days</string>
     <string name="tip_title">Tropi  \nTip</string>
-    <string name="can_be_yours">All of this can be yours...</string>
+    <string name="can_be_yours">IT CAN BE YOURS, JUST:</string>
 
 </resources>

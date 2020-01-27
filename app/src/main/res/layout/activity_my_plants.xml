@@ -53,9 +53,58 @@
         android:text="succulents"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
-        app:layout_constraintEnd_toEndOf="@+id/info_tropical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.545" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="362dp"
+        android:layout_height="131dp"
+        android:layout_marginTop="132dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/SocculentShelf"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
+    <ImageView
+        android:id="@+id/shelf3"
+        android:layout_width="750dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="248dp"
+        android:background="@drawable/ic_shelf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView2"
+        android:layout_width="355dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/shelf2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shelf3"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:id="@+id/tropicShelf"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
 
     <Button
         android:id="@+id/info_tropical"
@@ -70,9 +119,40 @@
         android:text="tropical"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView2"
-        app:layout_constraintEnd_toEndOf="@+id/info_spices"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shelf3"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/shelf2"
+        android:layout_width="750dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="432dp"
+        android:background="@drawable/ic_shelf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView3"
+        android:layout_width="354dp"
+        android:layout_height="149dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.719"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shelf2">
+
+        <LinearLayout
+            android:id="@+id/spiceShelf"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
 
     <Button
         android:id="@+id/info_spices"
@@ -90,92 +170,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2"
-        app:layout_constraintVertical_bias="0.581" />
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="362dp"
-        android:layout_height="131dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="132dp"
-        android:scrollbars="none"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:id="@+id/SocculentShelf"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" />
-    </HorizontalScrollView>
-
-    <ImageView
-        android:id="@+id/shelf3"
-        android:layout_width="750dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="244dp"
-        android:background="@drawable/ic_shelf"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView2"
-        android:layout_width="355dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
-
-        <LinearLayout
-            android:id="@+id/tropicShelf"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" />
-    </HorizontalScrollView>
-
-    <ImageView
-        android:id="@+id/shelf2"
-        android:layout_width="750dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="440dp"
-        android:background="@drawable/ic_shelf"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.433"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView3"
-        android:layout_width="354dp"
-        android:layout_height="149dp"
-        android:layout_marginTop="56dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2"
-        app:layout_constraintVertical_bias="0.047">
-
-        <LinearLayout
-            android:id="@+id/spiceShelf"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" />
-    </HorizontalScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/shelf2" />
 
     <ImageView
         android:id="@+id/shelf1"
         android:layout_width="750dp"
         android:layout_height="30dp"
-        android:layout_marginTop="656dp"
         android:background="@drawable/ic_shelf"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView3"
+        app:layout_constraintVertical_bias="0.072" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
