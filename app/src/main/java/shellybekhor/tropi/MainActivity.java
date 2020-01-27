@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setEmptyCheckList() {
         ScrollView toDoList = findViewById(R.id.plantsToDoList);
-        toDoList.setBackgroundResource(R.drawable.ic_nothing_to_do_text); // todo- add free day
+        toDoList.setBackgroundResource(R.drawable.ic_day_off); // todo- add free day
         View tasks = findViewById(R.id.allTasksLinear);
         tasks.setVisibility(View.INVISIBLE);
     }

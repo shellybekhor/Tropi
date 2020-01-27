@@ -35,5 +35,6 @@
     <string name="tropi_tip">check if your plants are dry every 2 days</string>
     <string name="tip_title">Tropi  \nTip</string>
     <string name="can_be_yours">IT CAN BE YOURS, JUST:</string>
+    <string name="log_out_main">Log out</string>
 
 </resources>
