@@ -25,11 +25,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/yesButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="80dp"
+        android:background="@drawable/rounded_green_button"
+        android:backgroundTint="@color/colorPrimaryGreen"
+        android:onClick="yesButtonOnClick"
+        android:text="@string/yesButton"
+        android:textColor="@color/colorText"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.554" />
+
+    <Button
         android:id="@+id/noButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="88dp"
-        android:layout_marginBottom="300dp"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/rounded_green_button"
         android:backgroundTint="@color/colorPrimaryGreen"
         android:fontFamily="@font/seoge_light"
@@ -39,26 +56,10 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryQuestion"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/yesButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginBottom="280dp"
-        android:background="@drawable/rounded_green_button"
-        android:backgroundTint="@color/colorPrimaryGreen"
-        android:onClick="yesButtonOnClick"
-        android:text="@string/yesButton"
-        android:textColor="@color/colorText"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/noButton"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryQuestion"
-        app:layout_constraintVertical_bias="0.565" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.554" />
 
     <TextView
         android:id="@+id/categoryQuestion"
