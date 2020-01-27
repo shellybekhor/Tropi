@@ -36,5 +36,8 @@
     <string name="tip_title">Tropi  \nTip</string>
     <string name="can_be_yours">IT CAN BE YOURS, JUST:</string>
     <string name="log_out_main">Log out</string>
+    <string name="visit_your_plants">Visit your plants</string>
+    <string name="coming_caring">Coming caring:</string>
+    <string name="add_new">add new</string>
 
 </resources>
