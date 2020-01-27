@@ -38,11 +38,6 @@ import java.util.Random;
  */
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_USER_ID = "shellybekhor.tropi.extra.USERID";
-    public static final String SUCCULENT = "Succulent";
-    public static final String TROPIC = "Tropic";
-    public static final String SPICES = "Spice";
-    public static final String WELL_DONE = "Well done!";
     public static final int PLANT_REQUEST = 0;
     public static final int TIP_WIDTH = 170;
     public static final int REQUEST_CODE = 1;
@@ -52,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
     boolean tipOpen = false;
     boolean noPlants = true;
 
+    public static final String EXTRA_USER_ID = "shellybekhor.tropi.extra.USERID";
+    public static final String SUCCULENT = "Succulent";
+    public static final String TROPIC = "Tropic";
+    public static final String SPICES = "Spice";
+    public static final String WELL_DONE = "Well done!";
 
     // TROPY TIPS //
     public static final String TIP_1 = "You can water with a sprinkler!";
@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         currentTasks.put(SUCCULENT, 0);
@@ -93,22 +92,18 @@ public class MainActivity extends AppCompatActivity {
         addListenerOnTasks();
     }
 
-    private void initWateredToday() {
-        Succulent succulent = new Succulent();
-        updatePlantWateredToday(succulent);
-        Tropic tropic = new Tropic();
-        updatePlantWateredToday(tropic);
-        Spices spices = new Spices();
-        updatePlantWateredToday(spices);
-    }
-
-    private void updatePlantWateredToday(Plant plant) {
-        if (plant.isWateredToday() &&
-                plant.getLastWatering() != Calendar.getInstance()) {
-            plant.setWateredToday(false);
+    private void initWateredToday() { // todo - save dates in shared preferences?
+        Calendar today = Calendar.getInstance();
+        if (Succulent.isWateredToday() && Succulent.getLastWatering() != today) {
+            Succulent.setWateredToday(false);
+        }
+        if (Tropic.isWateredToday() && Tropic.getLastWatering() != today) {
+            Tropic.setWateredToday(false);
+        }
+        if (Spices.isWateredToday() && Spices.getLastWatering() != today) {
+            Spices.setWateredToday(false);
         }
     }
-
 
     private void connectUser() {
         if (!checkIfUserLoggedInFacebook() && mAuth.getCurrentUser() == null){
@@ -149,6 +144,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private Plant getCategorizedPlant(String categoryName) {
+        Plant categorizedPlant = null;
+        switch (categoryName)
+        {
+            case SUCCULENT:
+                categorizedPlant = new Succulent();
+                break;
+            case TROPIC:
+                categorizedPlant = new Tropic();
+                break;
+            case SPICES:
+                categorizedPlant = new Spices();
+                break;
+        }
+        return categorizedPlant;
+    }
+
+
     private void addListenerOnTasks() {
         succulentCategoryListener(R.id.checkboxSucculent);
         tropicCategoryListener(R.id.checkboxTropic);
@@ -167,8 +180,7 @@ public class MainActivity extends AppCompatActivity {
                      v.setVisibility(View.INVISIBLE);
                     final TextView text = findViewById(R.id.taskTextSucculent);
                     text.setVisibility(View.INVISIBLE);
-                    Succulent succulent = new Succulent();
-                    succulent.setWateredToday(true);
+                    Succulent.isWateredToday = true;
                     currentTasks.put(SUCCULENT, 0);
                     if (isEmptyCheckList()) {
                         setEmptyCheckList();
@@ -190,8 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     v.setVisibility(View.INVISIBLE);
                     final TextView text = findViewById(R.id.taskTextTropic);
                     text.setVisibility(View.INVISIBLE);
-                    Tropic tropic = new Tropic();
-                    tropic.setWateredToday(true);
+                    Tropic.isWateredToday = true;
                     currentTasks.put(TROPIC, 0);
                     if (isEmptyCheckList()) {
                         setEmptyCheckList();
@@ -213,8 +224,7 @@ public class MainActivity extends AppCompatActivity {
                     v.setVisibility(View.INVISIBLE);
                     final TextView text = findViewById(R.id.taskTextSpices);
                     text.setVisibility(View.INVISIBLE);
-                    Spices spice = new Spices();
-                    spice.setWateredToday(true);
+                    Spices.isWateredToday = true;
                     currentTasks.put(SPICES, 0);
                     if (isEmptyCheckList()) {
                         setEmptyCheckList();
@@ -234,32 +244,15 @@ public class MainActivity extends AppCompatActivity {
                 (spicesCheckBox.getVisibility() == View.INVISIBLE));
     }
 
-    private Plant getCategorizedPlant(String categoryName) {
-        Plant categorizedPlant = null;
-        switch (categoryName)
-        {
-            case SUCCULENT:
-                categorizedPlant = new Succulent();
-                break;
-            case TROPIC:
-                categorizedPlant = new Tropic();
-                break;
-            case SPICES:
-               categorizedPlant = new Spices();
-                break;
-        }
-        return categorizedPlant;
-    }
-
     private void setTask(String categoryName) {
 
         // if there's already a task  in this category do nothing
-        if (currentTasks.get(categoryName) == 1) { return; }
+        Plant plant = getCategorizedPlant(categoryName);
+        if (currentTasks.get(categoryName) == 1 || plant.isWateredToday()) { return; }
 
         // if today is the day - create task and add it
-        Plant plant = getCategorizedPlant(categoryName);
         Calendar todayDate = Calendar.getInstance();
-        if (plant.getLastWatering() == null) {
+        if (plant.getLastWatering() == null) { // todo handle it better
             plant.setLastWatering(todayDate);
         }
 
@@ -267,8 +260,7 @@ public class MainActivity extends AppCompatActivity {
         long diff = todayDate.getTimeInMillis() -
                 plant.getLastWatering().getTimeInMillis();
         float daysDiff = (float) diff / (24 * 60 * 60 * 1000);
-        if (((daysDiff >= plant.getDaysBetweenWatering()) || (daysDiff == 0)) // todo remove 2nd part
-                && (!plant.isWateredToday())) {
+        if (((daysDiff >= plant.getDaysBetweenWatering()) || (daysDiff == 0))) { // todo remove 2nd part
             Task task = new Task(categoryName, plant.getGlassesPerWatering());
             addTaskToScroll(task);
             plant.setLastWatering(Calendar.getInstance());

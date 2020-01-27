@@ -11,12 +11,13 @@ import java.util.Calendar;
 public class Plant implements Serializable {
 
     public static final String[] CATEGORIES = {"Succulent", "Tropic", "Spice"};
+    public static boolean isWateredToday;
+
     private int category;
     private int daysBetweenWatering;
     private int glassesPerWatering;
-    private Calendar lastWatering;
+    private static Calendar lastWatering;
     private Calendar birthDate;
-    private boolean wateredToday;
 
 
 //    public Plant(){
@@ -30,15 +31,15 @@ public class Plant implements Serializable {
         glassesPerWatering = litersPerWatering;
         birthDate = Calendar.getInstance();
         lastWatering = null;
-        wateredToday = false;
+        isWateredToday = false;
     }
 
-    public Calendar getLastWatering() {
+    public static Calendar getLastWatering() {
         return lastWatering;
     }
 
-    public void setLastWatering(Calendar lastWatering) {
-        this.lastWatering = lastWatering;
+    public void setLastWatering(Calendar date) {
+        lastWatering = date;
     }
 
     public int getCategory() {
@@ -65,12 +66,12 @@ public class Plant implements Serializable {
         this.glassesPerWatering = glassesPerWatering;
     }
 
-    public boolean isWateredToday() {
-        return wateredToday;
+    public static boolean isWateredToday() {
+        return isWateredToday;
     }
 
-    public void setWateredToday(boolean wateredToday) {
-        this.wateredToday = wateredToday;
+    public static void setWateredToday(boolean wateredToday) {
+        isWateredToday = wateredToday;
     }
 
     public Calendar getBirthDate() {
