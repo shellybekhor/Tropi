@@ -42,7 +42,6 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_CATEGORY, category);
         intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
         startActivityForResult(intent, 1);
-
     }
 
     public void launchFindCategory() {
@@ -51,4 +50,10 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
+    public void launchMainActivity(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
 }

@@ -19,7 +19,9 @@ public class NoPlantsActivity extends AppCompatActivity {
 
     public void launchMainActivity(View view){
         Intent intent = new Intent(this, MainActivity.class);
-        startActivityForResult(intent, 1);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     public void addNewPlantButtonClicking(View view) {

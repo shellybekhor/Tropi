@@ -100,22 +100,10 @@ public class MyPlantsActivity extends AppCompatActivity {
 
     public void launchMainActivity(View view){
         Intent intent = new Intent(this, MainActivity.class);
-        startActivityForResult(intent, 1);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
-
-//    private void setNoPlants(){
-//        Button addNewPlant = findViewById(R.id.addPlantButton2);
-//        addNewPlant.setVisibility(View.VISIBLE);
-//        final int[] makeInvisible = {R.id.shelf1, R.id.shelf2, R.id.shelf3,
-//                R.id.info_succulent, R.id.info_tropical, R.id.info_spices};
-//        for(int id: makeInvisible){
-//            View v = findViewById(id);
-//            v.setVisibility(View.INVISIBLE);
-//        }
-//        RelativeLayout relativeLayout = new RelativeLayout(this);
-//        relativeLayout.setBackgroundResource(R.drawable.ic_background_np_mp);
-//        setContentView(relativeLayout);
-//    }
 
     public void infoPopUp(View view){
         // inflate the layout of the popup window

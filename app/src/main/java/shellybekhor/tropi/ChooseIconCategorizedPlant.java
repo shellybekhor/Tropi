@@ -97,4 +97,11 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
         intent.putExtra(EXTRA_ICON, icon);
         startActivityForResult(intent, 1);
     }
+
+    public void launchMainActivity(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
 }
