@@ -8,8 +8,8 @@ import shellybekhor.tropi.data.model.LoggedInUser;
  */
 public class LoginRepository {
 
+    // Class members //
     private static volatile LoginRepository instance;
-
     private LoginDataSource dataSource;
 
     // If user credentials will be cached in local storage, it is recommended it be encrypted
@@ -31,6 +31,7 @@ public class LoginRepository {
     public boolean isLoggedIn() {
         return user != null;
     }
+
 
     public void logout() {
         user = null;

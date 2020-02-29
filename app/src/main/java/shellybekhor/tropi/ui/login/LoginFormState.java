@@ -12,6 +12,7 @@ class LoginFormState {
     private Integer passwordError;
     private boolean isDataValid;
 
+    // CONSTRUCTORS //
     LoginFormState(@Nullable Integer usernameError, @Nullable Integer passwordError) {
         this.usernameError = usernameError;
         this.passwordError = passwordError;
@@ -24,6 +25,7 @@ class LoginFormState {
         this.isDataValid = isDataValid;
     }
 
+    // GETTERS //
     @Nullable
     Integer getUsernameError() {
         return usernameError;

@@ -41,24 +41,26 @@ import java.util.Random;
  */
 public class MainActivity extends AppCompatActivity {
 
+    // Class Members //
     public static final int PLANT_REQUEST = 0;
     public static final int TIP_WIDTH = 170;
     public static final int REQUEST_CODE = 1;
     public static final String TIMESTAMP = "timestamp";
     public static final String DATE_PATTERN = "dd-MM-yyyy";
+    public String currentUserId;
+    public boolean tipOpen = false;
+    public boolean noPlants = true;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-    String currentUserId;
-    boolean tipOpen = false;
-    boolean noPlants = true;
 
+    // Final Static Members //
     public static final String EXTRA_USER_ID = "shellybekhor.tropi.extra.USERID";
     public static final String SUCCULENT = "Succulent";
     public static final String TROPIC = "Tropic";
     public static final String SPICES = "Spice";
     public static final String WELL_DONE = "Well done!";
 
-    // TROPY TIPS //
+    // Tropi Tips //
     public static final String TIP_1 = "You can water with a sprinkler!";
     public static final String TIP_2 = "Clean your plants from dust, " +
                                         "it makes them happier";
@@ -81,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
      */
     public static HashMap<String, Integer> currentTasks = new HashMap<String, Integer> ();
 
-
+    /**
+     * Series of actions happening in the creation of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +101,10 @@ public class MainActivity extends AppCompatActivity {
         addListenerOnTasks();
     }
 
-    private void initWateredToday() { // todo - save dates in shared preferences?
+    /**
+     * Init of the categories and their watering time
+     */
+    private void initWateredToday() {
         Calendar today = Calendar.getInstance();
         if (Succulent.isWateredToday() && Succulent.getLastWatering() != today) {
             Succulent.setWateredToday(false);
@@ -110,17 +117,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Connect user if not yet connected
+     */
     private void connectUser() {
         if (!checkIfUserLoggedInFacebook() && mAuth.getCurrentUser() == null){
             launchLoginActivity();
         }
     }
 
+    /**
+     * Launch the login activity
+     */
     private void launchLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
+    /**
+     * get the user's plants info from DB
+     */
     private void getPlantsDatabase() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -141,7 +157,8 @@ public class MainActivity extends AppCompatActivity {
                                 categoryLastTS = updateDateInDB(cat, clearCal);
                             }
                             else{
-                                String dateStr = dataSnapshot.child(cat).child(TIMESTAMP).getValue(String.class);
+                                String dateStr = dataSnapshot.child(cat).child(TIMESTAMP)
+                                        .getValue(String.class);
                                 categoryLastTS = readDateFromDB(dateStr);
                             }
                             setTask(cat, categoryLastTS);
@@ -159,6 +176,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Get the last watering date from DB
+     * @return The last watering date
+     */
     private Calendar readDateFromDB(String dateStr) {
         Calendar categoryLastTS;
         Date date;
@@ -174,6 +195,11 @@ public class MainActivity extends AppCompatActivity {
         return categoryLastTS;
     }
 
+    /**
+     * Create a categoriezed plant object
+     * @param categoryName The plant category
+     * @return The plant object
+     */
     private Plant getCategorizedPlant(String categoryName) {
         Plant categorizedPlant = null;
         switch (categoryName)
@@ -191,13 +217,21 @@ public class MainActivity extends AppCompatActivity {
         return categorizedPlant;
     }
 
-
+    /**
+     * Handling the watering to do list listeners
+     */
     private void addListenerOnTasks() {
         succulentCategoryListener(R.id.checkboxSucculent);
         tropicCategoryListener(R.id.checkboxTropic);
         spicesCategoryListener(R.id.checkboxSpices);
     }
 
+    /**
+     * Updating the watering date in DB after doing it
+     * @param categoryName The plants category
+     * @param date The watering date
+     * @return The date
+     */
     private Calendar updateDateInDB(String categoryName, Calendar date){
         if (date == null){
             date = Calendar.getInstance();
@@ -208,6 +242,9 @@ public class MainActivity extends AppCompatActivity {
         return date;
     }
 
+    /**
+     * The Succulent check box listener
+     */
     private void succulentCategoryListener(int checkBoxId) {
         final CheckBox checkBox = findViewById(checkBoxId);
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -230,6 +267,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * The Tropic check box listener
+     */
     private void tropicCategoryListener(int checkBoxId) {
         final CheckBox checkBox = findViewById(checkBoxId);
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -252,6 +292,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * The Spices check box listener
+     */
     private void spicesCategoryListener(int checkBoxId) {
         final CheckBox checkBox = findViewById(checkBoxId);
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -274,6 +317,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Check if to do list is all done
+     */
     private boolean isEmptyCheckList() {
         View succulentCheckBox = findViewById(R.id.checkboxSucculent);
         View tropicCheckBox = findViewById(R.id.checkboxTropic);
@@ -284,6 +330,11 @@ public class MainActivity extends AppCompatActivity {
                 (spicesCheckBox.getVisibility() == View.INVISIBLE));
     }
 
+    /**
+     * Create a new task according to the watering times
+     * @param categoryName The plants category
+     * @param categoryTS the last catergory watering date
+     */
     private void setTask(String categoryName, Calendar categoryTS) {
         // if there's already a task  in this category do nothing
         Plant plant = getCategorizedPlant(categoryName);
@@ -302,6 +353,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Add the task to the TO DO list scroll
+     * @param task The task
+     */
     private void addTaskToScroll(Task task) {
         LinearLayout toDoList = findViewById(R.id.allTasksLinear);
         if (task._categoryName.equals(getResources().getString(R.string.Succulent))) {
@@ -327,13 +382,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Update the To Do scroll to the empty visibility
+     */
     private void setEmptyCheckList() {
         ScrollView toDoList = findViewById(R.id.plantsToDoList);
-        toDoList.setBackgroundResource(R.drawable.ic_day_off); // todo- add free day
+        toDoList.setBackgroundResource(R.drawable.ic_day_off);
         View tasks = findViewById(R.id.allTasksLinear);
         tasks.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * Check if user is logged in with facebook
+     */
     private boolean checkIfUserLoggedInFacebook(){
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null && !accessToken.isExpired();
@@ -348,6 +409,9 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, PLANT_REQUEST);
     }
 
+    /**
+     * Launch the 'my plants' activity
+     */
     public void goToMyPlants(View view) {
         Intent intent;
         if (noPlants) {
@@ -360,6 +424,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Sign out of the user
+     */
     public void signOut(View view){
         mAuth.signOut();
         launchLoginActivity();
@@ -371,6 +438,9 @@ public class MainActivity extends AppCompatActivity {
         getPlantsDatabase();
     }
 
+    /**
+     * Open the Tropi Tip box and showing the tip
+     */
     public void openTropiTip(View view){
         TextView text = (TextView) view;
         ViewGroup.LayoutParams params = view.getLayoutParams();
@@ -387,6 +457,9 @@ public class MainActivity extends AppCompatActivity {
         view.setLayoutParams(params);
     }
 
+    /**
+     * Add to the activity the 'Tropi Tip' for better treatment
+     */
     private String randomTip(){
         Random r = new Random();
         String[] tips = {TIP_1, TIP_2, TIP_3, TIP_4, TIP_5, TIP_6, TIP_7, TIP_8, TIP_9, TIP_10};

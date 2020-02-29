@@ -10,9 +10,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * The activity enables to find plant's category if not originaly known,
+ * by answering a few identification questions
+ */
 public class FindCategoryActivity extends AppCompatActivity {
 
-    String currentUserId;
     /**
      * Current category, initialized to -1.
      */
@@ -24,7 +27,14 @@ public class FindCategoryActivity extends AppCompatActivity {
      * 2 - after second answer and before the third
      */
     private int phase = 0;
+    /**
+     * The user id.
+     */
+    public String currentUserId;
 
+    /**
+     * Series of actions happening in the creation of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +43,9 @@ public class FindCategoryActivity extends AppCompatActivity {
         currentUserId = intent.getStringExtra(MainActivity.EXTRA_USER_ID);
     }
 
+    /**
+     * Leading to the next step of creating a plant in case of 'YES' click
+     */
     public void yesButtonOnClick(View view) {
         if (phase == 0) {
             category = Succulent.CATEGORY;
@@ -44,6 +57,9 @@ public class FindCategoryActivity extends AppCompatActivity {
         launchCreatePlant(category);
     }
 
+    /**
+     * Leading to the next step in case of 'NO' click
+     */
     public void noButtonOnClick(View view) {
         if (phase == 0) {
             phase = 1;
@@ -61,6 +77,9 @@ public class FindCategoryActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Launching the create plant activity after choosing its category
+     */
     private void launchCreatePlant(int category){
         Intent intent = new Intent(this, ChooseIconCategorizedPlant.class);
         intent.putExtra(ChooseCategoryActivity.EXTRA_CATEGORY, category);
@@ -68,6 +87,9 @@ public class FindCategoryActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
+    /**
+     * Launching main activity
+     */
     public void launchMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

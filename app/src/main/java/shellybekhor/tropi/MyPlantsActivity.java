@@ -10,12 +10,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
+import android.widget.ImageView;
+import android.widget.Button;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,13 +25,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-
-// https://www.youtube.com/watch?v=hl0AcuplFwE
-
+/**
+ * The My Plants activity showing the user all of its plants
+ * in the different categories
+ */
 public class MyPlantsActivity extends AppCompatActivity {
 
-    String currentUserId;
-    int newPlant = -1;
+    // Class members //
+    public String currentUserId;
+    public int newPlant = -1;
     public static final String EXTRA_NP = "shellybekhor.tropi.extra.NEW_PLANT";
     private final int[] shelvesIDs = {R.id.SocculentShelf, R.id.tropicShelf, R.id.spiceShelf};
     private ArrayList<Integer> succulentIcons = new ArrayList<>();
@@ -39,6 +41,9 @@ public class MyPlantsActivity extends AppCompatActivity {
     private ArrayList<Integer> spicesIcons = new ArrayList<>();
     private ArrayList[] totalIcons = {succulentIcons, tropicIcons, spicesIcons};
 
+    /**
+     * Series of actions happening in the creation of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +55,11 @@ public class MyPlantsActivity extends AppCompatActivity {
         readIconsFromDB();
     }
 
+    /**
+     * Adding the icons to the shelf by category
+     * @param shelfId The specific shelf
+     * @param icons The icons list
+     */
     private void addIcons(int shelfId, ArrayList<Integer> icons){
         LinearLayout shelf = findViewById(shelvesIDs[shelfId]);
         int newIcon = 0;
@@ -64,6 +74,11 @@ public class MyPlantsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creating icon views for the horizontal scroll in shelf
+     * @param resource The original image
+     * @param isNew Is appearing in shelf for the first time
+     */
     private View createImageView(int resource, boolean isNew){
         View view = new View(this);
         if (isNew) {
@@ -75,6 +90,9 @@ public class MyPlantsActivity extends AppCompatActivity {
         return view;
     }
 
+    /**
+     * Get plants and icons from the DB by category
+     */
     private void readIconsFromDB(){
         DatabaseReference userDB = FirebaseDatabase.getInstance().getReference(currentUserId);
         userDB.addValueEventListener(new ValueEventListener() {
@@ -90,7 +108,6 @@ public class MyPlantsActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
@@ -98,6 +115,9 @@ public class MyPlantsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Launch the main activity
+     */
     public void launchMainActivity(View view){
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -105,6 +125,9 @@ public class MyPlantsActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Showing info on each of the plants categories when clicked
+     */
     public void infoPopUp(View view){
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
@@ -132,6 +155,9 @@ public class MyPlantsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Updating the plants info text by category
+     */
     private void setInfoText(int viewId, TextView text) {
         switch(viewId){
             case R.id.info_succulent:

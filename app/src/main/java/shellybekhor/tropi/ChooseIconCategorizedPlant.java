@@ -16,22 +16,31 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * This activity is enabling to choose the plant's icon for identification
+ */
 public class ChooseIconCategorizedPlant extends AppCompatActivity {
 
-    private DatabaseReference mDatabase;
-    int currentCategory;
-    String currentCatName;
-    String currentUserId;
+    // members //
     public static final String EXTRA_ICON = "shellybekhor.tropi.extra.ICON";
-    int[] succulentsIcons = {R.drawable.ic_cactus1, R.drawable.ic_cactus2, R.drawable.ic_cactus3,
+    private DatabaseReference mDatabase;
+    public int currentCategory;
+    public String currentCatName;
+    public String currentUserId;
+
+    // The different categories' icons //
+    public int[] succulentsIcons = {R.drawable.ic_cactus1, R.drawable.ic_cactus2, R.drawable.ic_cactus3,
             R.drawable.ic_succulent1, R.drawable.ic_succulent2,
             R.drawable.ic_sansivera};
-    int[] spicesIcons = {R.drawable.ic_basil, R.drawable.ic_cherry_tomato, R.drawable.ic_mint,
+    public int[] spicesIcons = {R.drawable.ic_basil, R.drawable.ic_cherry_tomato, R.drawable.ic_mint,
             R.drawable.ic_oregano, R.drawable.ic_lettuce, R.drawable.ic_avocado};
-    int[] tropicalsIcons = {R.drawable.ic_boston_fern, R.drawable.ic_pink_syngonyum,
+    public int[] tropicalsIcons = {R.drawable.ic_boston_fern, R.drawable.ic_pink_syngonyum,
             R.drawable.ic_birdsnest, R.drawable.ic_ornata, R.drawable.ic_pothos,
             R.drawable.ic_banana, R.drawable.ic_rubber_piccus, R.drawable.ic_monstera};
 
+    /**
+     * Series of actions happening in the creation of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +54,9 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
+    /**
+     * Setting the plant's category in order to create an icon
+     */
     private void setCatagory() {
         TextView text = findViewById(R.id.CateogoryName);
 
@@ -67,6 +79,10 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
         }
     }
 
+    /**
+     * Enabling the user to see the relevant icon in order to choose one
+     * @param icons The relevant icons list
+     */
     private void defineIcons(int[] icons) {
         LinearLayout iconsScroll = findViewById(R.id.layoutScrollIcons);
         for (int i : icons) {
@@ -85,11 +101,19 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
         }
     }
 
+    /**
+     * Adding the new plant and icon to the DB under the user
+     * @param chosenIcon The plant's icon
+     * @param categoryName The plant's category
+     */
     private void addPlantToDB(int chosenIcon, String categoryName) {
         DatabaseReference categoryRef = mDatabase.child(currentUserId).child(categoryName);
         categoryRef.push().setValue(chosenIcon);
     }
 
+    /**
+     * Lanching the plants info activity
+     */
     public void launchPlantInfo(int icon) {
         Intent intent = new Intent(this, PlantInfoActivity.class);
         intent.putExtra(ChooseCategoryActivity.EXTRA_CATEGORY, currentCategory);
@@ -98,6 +122,9 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
+    /**
+     * Lanching the main activity
+     */
     public void launchMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

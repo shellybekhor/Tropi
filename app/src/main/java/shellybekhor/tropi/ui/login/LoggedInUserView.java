@@ -5,13 +5,15 @@ package shellybekhor.tropi.ui.login;
  */
 class LoggedInUserView {
     private String displayName;
-    //... other data fields that may be accessible to the UI
 
-    LoggedInUserView(String displayName) {
+    /**
+     * Displaying the login view
+     */
+    public LoggedInUserView(String displayName) {
         this.displayName = displayName;
     }
 
-    String getDisplayName() {
+    public String getDisplayName() {
         return displayName;
     }
 }

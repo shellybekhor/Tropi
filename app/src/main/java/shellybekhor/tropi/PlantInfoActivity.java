@@ -10,11 +10,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * This activity shows info on the categorized plant after adding it
+ */
 public class PlantInfoActivity extends AppCompatActivity {
 
+    // class members //
     int currentCategory;
     String currentUserId;
 
+    /**
+     * Series of actions happening in the creation of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +34,9 @@ public class PlantInfoActivity extends AppCompatActivity {
         editInfoText();
     }
 
+    /**
+     * Setting the correct text by category
+     */
     private void editInfoText(){
         TextView info = findViewById(R.id.infoText);
         switch (currentCategory){
@@ -40,9 +50,11 @@ public class PlantInfoActivity extends AppCompatActivity {
                 info.setText(R.string.SpiceInfo);
                 break;
         }
-
     }
 
+    /**
+     * Launch the main activity
+     */
     public void launchMainActivity(View view){
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -50,6 +62,9 @@ public class PlantInfoActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Launch the My Plants activity
+     */
     public void launchMyPlants(View view){
         Intent intent = new Intent(this, MyPlantsActivity.class);
         intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);

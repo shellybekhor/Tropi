@@ -11,16 +11,24 @@ import shellybekhor.tropi.data.Result;
 import shellybekhor.tropi.data.model.LoggedInUser;
 import shellybekhor.tropi.R;
 
+/**
+ * The login view model class
+ */
 public class LoginViewModel extends ViewModel {
 
+    // class members //
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
+    /**
+     * Constructor
+     */
     LoginViewModel(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
     }
 
+    // GETTERS //
     LiveData<LoginFormState> getLoginFormState() {
         return loginFormState;
     }
@@ -29,6 +37,11 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
+    /**
+     * Perform login using the given user information
+     * @param username The given user name
+     * @param password The given password
+     */
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
         Result<LoggedInUser> result = loginRepository.login(username, password);
@@ -51,7 +64,11 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    // A placeholder username validation check
+    /**
+     * A placeholder username validation check
+     * @param username The checked username
+     * @return The validation result
+     */
     private boolean isUserNameValid(String username) {
         if (username == null) {
             return false;
@@ -59,7 +76,11 @@ public class LoginViewModel extends ViewModel {
         return Patterns.EMAIL_ADDRESS.matcher(username).matches();
     }
 
-    // A placeholder password validation check
+    /**
+     * A placeholder password validation check
+     * @param password The checked password
+     * @return The validation result
+     */
     private boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
     }

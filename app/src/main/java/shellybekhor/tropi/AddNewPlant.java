@@ -1,5 +1,6 @@
 package shellybekhor.tropi;
 
+// IMPORTS //
 import androidx.appcompat.app.AppCompatActivity;
 import shellybekhor.tropi.Plants.Plant;
 import shellybekhor.tropi.Plants.Succulent;
@@ -10,18 +11,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * Activity that adds a new plant
+ */
 public class AddNewPlant extends AppCompatActivity {
-    private static final String LOG_TAG = AddNewPlant.class.getSimpleName();
+
+    // Members //
     public static final String EXTRA_PLANT = "shellybekhor.tropi.extra.PLANT";
-    int currentCategory;
-    String currentUserId;
+    private static final String LOG_TAG = AddNewPlant.class.getSimpleName();
+    public int currentCategory;
+    public String currentUserId;
     private DatabaseReference mDatabase;
 
+    /**
+     * Series of actions happening in the creation of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +42,9 @@ public class AddNewPlant extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
+    /**
+     * Adding the new plant
+     */
     public void plantDone(View view){
 //        EditText locationTextView = findViewById(R.id.locationText);
 //        String location = locationTextView.getText().toString();

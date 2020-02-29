@@ -42,6 +42,9 @@ import com.google.firebase.auth.FirebaseUser;
 import shellybekhor.tropi.MainActivity;
 import shellybekhor.tropi.R;
 
+/**
+ * The login activity class
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
@@ -50,6 +53,9 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager mCallbackManager;
     private static final String EMAIL = "email";
 
+    /**
+     * Series of actions happening in the creation of the activity
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +150,11 @@ public class LoginActivity extends AppCompatActivity {
         FacebookAuth();
     }
 
+    /**
+     * Signing in method
+     * @param email The user given email
+     * @param password The user's given password
+     */
     private void signIn(final String email, final String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
@@ -165,6 +176,11 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Creating a new user account for adding it to the DB
+     * @param email The user email
+     * @param password The user's password
+     */
     private void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
@@ -186,14 +202,23 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Adding a welcome message
+     */
     private void welcomeUser() {
         Toast.makeText(getApplicationContext(), getString(R.string.welcome), Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Indicating that the login was unsuccesful
+     */
     private void showLoginFailed() {
         Toast.makeText(getApplicationContext(), "Failed to login", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Handeling the authentication process by facebook authentication
+     */
     public void FacebookAuth(){
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
@@ -231,6 +256,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * Checks if user is alrady signed in
+     */
     @Override
     public void onStart() {
         super.onStart();
@@ -239,11 +267,17 @@ public class LoginActivity extends AppCompatActivity {
 //        updateUI(currentUser);
     }
 
+    /**
+     * Launching main activity
+     */
     private void launchMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Handles Facebook access token for authenticating with Facebook
+     */
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
