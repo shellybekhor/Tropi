@@ -40,6 +40,7 @@ import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseUser;
 
 import shellybekhor.tropi.MainActivity;
+import shellybekhor.tropi.NoPlantsActivity;
 import shellybekhor.tropi.R;
 
 /**
@@ -98,9 +99,6 @@ public class LoginActivity extends AppCompatActivity {
 //                    welcomeUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-//                finish();
             }
         });
 
@@ -163,10 +161,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
                             welcomeUser();
                             setResult(Activity.RESULT_OK);
-                            finish();
+                            launchMainActivity();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -189,10 +186,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
                             welcomeUser();
                             setResult(Activity.RESULT_OK);
-                            finish();
+                            launchNoPlantsActivity();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -231,7 +227,7 @@ public class LoginActivity extends AppCompatActivity {
                 AccessToken accessToken = AccessToken.getCurrentAccessToken();
                 handleFacebookAccessToken(accessToken);
                 setResult(Activity.RESULT_OK);
-                finish();
+                launchMainActivity();
             }
 
             @Override
@@ -257,22 +253,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks if user is alrady signed in
+     * Launch the main activity
      */
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
+    public void launchMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     /**
-     * Launching main activity
+     * Launch the empty plants activity
      */
-    private void launchMainActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
+    public void launchNoPlantsActivity(){
+        Intent intent = new Intent(this, NoPlantsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
     /**

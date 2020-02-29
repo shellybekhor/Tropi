@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Connect user if not yet connected
+     * Launch Login activity to connect user if not yet connected
      */
     private void connectUser() {
         if (!checkIfUserLoggedInFacebook() && mAuth.getCurrentUser() == null){
@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
     private void launchLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivityForResult(intent, REQUEST_CODE);
+        finish();
     }
 
     /**

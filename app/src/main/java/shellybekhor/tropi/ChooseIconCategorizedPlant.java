@@ -112,7 +112,7 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
     }
 
     /**
-     * Lanching the plants info activity
+     * Launching the plants info activity
      */
     public void launchPlantInfo(int icon) {
         Intent intent = new Intent(this, PlantInfoActivity.class);
@@ -123,7 +123,7 @@ public class ChooseIconCategorizedPlant extends AppCompatActivity {
     }
 
     /**
-     * Lanching the main activity
+     * Launching the main activity
      */
     public void launchMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
