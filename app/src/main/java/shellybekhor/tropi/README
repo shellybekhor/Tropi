@@ -1,18 +1,64 @@
 
-===============================================================
+==================================================================
 
-                         TROPI APP
+                           TROPI APP
 
-===============================================================
- Almog Argaman, Shelly Bekhor, Carolina Zlotnik, Libi Meshorer
-===============================================================
+==================================================================
+  Almog Argaman, Shelly Bechor, Carolina zlotnik, Libi Meshorer
+==================================================================
 
-========
-Design
-========
+=============
+ The Vision
+=============
+
+As four plants lover students we spoke about how sad it is to
+lose a loved plant for bad treatment. We decided to fight it by
+creating an app handling our plants watering routine: TROPI.
+
+Tropi is enabling saving new plants we adopt to our home, finding
+their category and following that to remind the user when to
+water the plants by categories.
+
+It avoids plants dehydration or over-hydration in order to extend
+their lives. By following the app and checking all the watering
+"to do" check boxes, the user will be able to enlarge his plant
+collection into his mini-jungle dream of healthy beautiful plants.
+
+
+================
+ About The App
+================
+
+The app UI was intended to be fun and colorful in order to create
+an engagement of the user and encourage him to update the app with
+every new plant he adopts and follow the treatment instructions.
+
+Every plant in the app is identified by it's category, and therefore
+the correct watering routine, and the plant icon that can be chosen
+from multiple icons.
+
+The app main screen holds a 'to do' check box with the watering
+tasks for the current day.
+
+
+=========
+ Design
+=========
+
+(*) We have 4 plants classes, one base class and three inheriting ones.
+Each inheriting class in defining the correct traetement for that
+specific plant type:
 
 Plant (abstract base class)
     Succulents
+    Spices
+    Tropic
+
+(*) The user plants data is saved into a firebase DB holding the user
+details, plants categories, icons and last watering date.
 
 
+=========
 
+Thank you for the opportunity to learn!
+Tropi team
