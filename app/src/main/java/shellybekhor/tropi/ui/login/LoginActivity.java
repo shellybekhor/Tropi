@@ -266,7 +266,14 @@ public class LoginActivity extends AppCompatActivity {
      * Launch the empty plants activity
      */
     public void launchNoPlantsActivity(){
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            launchMainActivity();
+            return;
+        }
+        String currentUserId = currentUser.getUid();
         Intent intent = new Intent(this, NoPlantsActivity.class);
+        intent.putExtra(MainActivity.EXTRA_USER_ID, currentUserId);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
