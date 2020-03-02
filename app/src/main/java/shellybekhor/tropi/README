@@ -58,6 +58,33 @@ Plant (abstract base class)
 details, plants categories, icons and last watering date.
 
 
+===========
+ Database
+===========
+
+We used the Firebase API for saving users data in a convenient
+and stable way. First, we use the Firebase Authentication, to authenticate
+users to our app by email and password or facebook account.
+Second, we used the Real-time Database, to save all data per user, and
+keep it when a user logs out and sign in again. The Real-time database
+is used for store and sync data with NoSQL cloud database.
+The data in the Real-time database is organized as a dictionary of
+user Ids as keys and their data as values. Each user has 3 items:
+Succulent, Spice and Tropic, as the 3 categorizes we chose for all the
+plants in the app. Under each category we save plants by random Id and
+their icon id (user’s choice).
+
+
+===========
+ Team work
+===========
+
+As we only worked on the code while being together the reviewing method we
+chose was pair-programming. We coded together class by class and activity by
+activity reading the flow together and improving each other.
+Each change was written and pushed to the project git after syncing of the team
+
+
 =========
 
 Thank you for the opportunity to learn!
